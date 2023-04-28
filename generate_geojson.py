@@ -43,7 +43,7 @@ def make_geojson(file, d):
         y = float(o[4].replace(',', '.'))
         c = convert_projection(x, y)
 
-        point = Point((float(c[0]), float(c[1])))
+        point = Point((float(c[1]), float(c[0])))
             
         properties = {
             'id': o[0],
