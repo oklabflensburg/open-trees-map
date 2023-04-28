@@ -3,6 +3,9 @@
 Interaktive webbasierte Baumkataster Karten basierend auf Opendata 
 
 
+![Screenshot Baumkataster Karte](https://raw.githubusercontent.com/oklabflensburg/open-trees-map/main/baumkataster_gelsenkirchen.png)
+
+
 ## Prerequisite
 
 ```
