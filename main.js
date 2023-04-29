@@ -1,3 +1,4 @@
+// fetch('/data/baumkataster_bonn.updated.geojson', {
 fetch('/data/baumkataster_gelsenkirchen.geojson', {
   method: 'GET'
 })
@@ -63,7 +64,7 @@ function addData(data) {
 
                 map.setView(e.latlng, 19);
 
-                let description = e.target.feature.properties.description
+                let place = e.target.feature.properties.place
                 let type = e.target.feature.properties.type
                 let model = e.target.feature.properties.model
                 let plant = e.target.feature.properties.plant
@@ -72,7 +73,7 @@ function addData(data) {
                 let height = e.target.feature.properties.height
 
                 document.getElementById('details').classList.remove('hidden');
-                document.getElementById('description').innerHTML = description || '---';
+                document.getElementById('place').innerHTML = place || '---';
                 document.getElementById('type').innerHTML = type || '---';
                 document.getElementById('model').innerHTML = model || '---';
                 document.getElementById('plant').innerHTML = plant || '---';

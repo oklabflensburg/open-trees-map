@@ -47,7 +47,7 @@ def make_geojson(file, d):
             
         properties = {
             'id': o[0],
-            'description': o[1],
+            'place': o[1],
             'type': o[5],
             'model': o[6],
             'tribs': o[7],
