@@ -44,7 +44,14 @@ COPY tree_species(species_german, species_latin) FROM 'data/tree_species.csv' DE
 GRANT USAGE ON SCHEMA public TO postgis_user;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO postgis_user;
 GRANT USAGE, SELECT ON SEQUENCE tree_species_pkey_seq TO postgis_user;
+
+sudo chown user:postgres data/unknown_species.csv
+COPY (SELECT type FROM baumkataster_gelsenkirchen WHERE tkey IS NULL GROUP BY type) TO 'data/unknown_species.csv' WITH DELIMITER ',' CSV HEADER;
+sudo chown user:user data/unknown_species.csv
 ```
+
+
+## Dump Baumarten
 
 ```
 pg_dump -h localhost -p 5432 -U postgis_user -d postgis_db -t tree_species > tree_species.sql
