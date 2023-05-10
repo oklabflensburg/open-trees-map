@@ -21,6 +21,9 @@ conn = psycopg2.connect(
 
 
 def update_species(cur, tkey, tspecies):
+    print(tkey)
+    print(tspecies)
+
     sql = 'UPDATE baumkataster_gelsenkirchen AS t SET tkey = %s WHERE t.type = %s'''
     
     updated_rows = 0
@@ -29,13 +32,12 @@ def update_species(cur, tkey, tspecies):
         cur.execute(sql, (tkey, tspecies))
         updated_rows = cur.rowcount
         conn.commit()
-        cur.close()
+        # cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
 
+    print()
+    print('Numbers updated')
     print(updated_rows)
 
 
@@ -43,21 +45,19 @@ def main():
     cur = conn.cursor()
 
     cur.execute('''
-                SELECT * FROM baumkataster_gelsenkirchen AS t
+                SELECT t.type, s.skey FROM baumkataster_gelsenkirchen AS t
                 JOIN tree_species AS s
                 ON s.species_latin = t.type
-                WHERE t.tkey IS NULL
+                GROUP BY t.type, s.skey
     ''')
 
-    row = cur.fetchone()
+    rows = cur.fetchall()
 
-    while row:
-        row = cur.fetchone()
-        print(row[3])
-        print(row[0])
+    for row in rows:
+        print(row)
+        print()
 
-        update_species(cur, row[0], row[3])
-        break
+        update_species(cur, row[1], row[0])
 
 
 if __name__ == '__main__':
