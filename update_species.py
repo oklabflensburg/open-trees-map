@@ -21,9 +21,6 @@ conn = psycopg2.connect(
 
 
 def update_species(cur, tkey, tspecies):
-    print(tkey)
-    print(tspecies)
-
     sql = 'UPDATE baumkataster_gelsenkirchen AS t SET tkey = %s WHERE t.type = %s'''
     
     updated_rows = 0
@@ -36,9 +33,7 @@ def update_species(cur, tkey, tspecies):
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
-    print()
-    print('Numbers updated')
-    print(updated_rows)
+    print(f'updated: {updated_rows}\n')
 
 
 def main():
@@ -55,10 +50,8 @@ def main():
 
     for row in rows:
         print(row)
-        print()
 
         update_species(cur, row[1], row[0])
-
 
 if __name__ == '__main__':
     main()
