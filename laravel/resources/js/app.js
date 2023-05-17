@@ -103,8 +103,8 @@ function addData(data) {
             const label = String(feature.properties.type)
 
             const customIcon = L.icon({
-                iconUrl: '/static/marker-icon-green.png',
-                shadowUrl: '/static/marker-shadow.png',
+                iconUrl: '/storage/marker-icon-green.png',
+                shadowUrl: '/storage/marker-shadow.png',
                 iconSize: [25, 41],
                 iconAnchor: [12, 41],
                 tooltipAnchor: [0, -38],
