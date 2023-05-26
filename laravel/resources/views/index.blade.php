@@ -18,6 +18,11 @@
                     <div class="mb-2" id="crown"></div>
                     <div class="font-bold">Baumhöhe</div>
                     <div id="height"></div>
+                    <form action="{{ route('imageupload') }}" method="POST">
+                        @csrf
+                        <input type="file" id="file" name="file" accept="image/*">
+                        <button class="btn" type="submit">Absenden</button>
+                    </form>
                 </div>
             </div>
             <div class="py-2 px-3">
