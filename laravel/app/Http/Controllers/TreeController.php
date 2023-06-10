@@ -52,8 +52,8 @@ class TreeController extends Controller
                     ]
                 ],
                 'properties' => [
-                    'id' => '100033772',
-                    'place' => 'Straßenbegleitgrün: Buerelterstraße',
+                    'id' => $baum->id,
+                    'place' => $baum->ort,
                     'type' => $baum->baumart->deutsch,
                     'model' => '',
                     'tribs' => '1',
@@ -67,5 +67,12 @@ class TreeController extends Controller
         }
         $geotestarray = (object)['type' => 'FeatureCollection', 'crs' => ['type' => 'name', 'properties' => ['name' => 'urn:ogc:def:crs:OGC:1.3:CRS84']], 'features' => $data];
         return $geotestarray;
+    }
+
+    public function show(Baum $baum)
+    {
+        // Um die Bilder von dem ausgewählten baum zu holen
+        $baum->Bilder;
+        return $baum;
     }
 }

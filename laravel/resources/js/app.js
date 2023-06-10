@@ -97,6 +97,24 @@ function addData(data) {
                 document.getElementById('scope').innerHTML = scope || '---';
                 document.getElementById('crown').innerHTML = crown || '---';
                 document.getElementById('height').innerHTML = height || '---';
+                // Get Data from Database
+                fetch('/baum/' + e.target.feature.properties.id, {
+                    method: 'GET'
+                })
+                    .then((response) => {
+                        return response.json();
+                    }).then((response) => {
+                        if (response.bilder.length > 0) {
+                            response.bilder.forEach(element => {
+                                let img = document.createElement('img');
+                                img.src = '/storage/' + element.filename;
+                                img.classList.add('w-1/2');
+                                img.classList.add('mx-auto');
+                                img.classList.add('my-2');
+                                document.getElementById('images').appendChild(img);
+                            });
+                        }
+                    })
             })
         },
         pointToLayer: function (feature, latlng) {

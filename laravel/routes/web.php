@@ -20,6 +20,7 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/about', [IndexController::class, 'about']);
 Route::post('/imageupload', [TreeController::class, 'imageupload'])->name('imageupload');
 Route::get('/testdata.geojson', [TreeController::class, 'test'])->name('testdata');
+Route::get('/baum/{baum}', [TreeController::class, 'show'])->name('baum.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
