@@ -1,4 +1,10 @@
 <x-guest-layout>
+    @foreach ($errors->all() as $message)
+        <div class="alert alert-danger">{{ $message }}</div>
+    @endforeach
+    @if(session()->get('status'))
+        <div>{{ session()->get('status') }}</div>
+    @endif
     <div class="h-screen md:flex overflow-auto">
         <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-96 sm:h-screen overflow-hidden" id="map"></div>
         <div class="w-full sm:w-4/12 md:w-5/12 lg:w-3/12 sm:h-screen sm:overflow-scroll bg-gray-100" id="filter">
@@ -18,9 +24,9 @@
                     <div class="mb-2" id="crown"></div>
                     <div class="font-bold">Baumhöhe</div>
                     <div id="height"></div>
-                    <form action="{{ route('imageupload') }}" method="POST">
+                    <form action="{{ route('imageupload') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" id="file" name="file" accept="image/*">
+                        <input type="file" id="file" name="file" capture accept="image/*">
                         <button class="btn" type="submit">Absenden</button>
                     </form>
                 </div>
