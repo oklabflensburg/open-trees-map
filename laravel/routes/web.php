@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/about', [IndexController::class, 'about']);
 Route::post('/imageupload', [TreeController::class, 'imageupload'])->name('imageupload');
+Route::get('/testdata.geojson', [TreeController::class, 'test'])->name('testdata');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

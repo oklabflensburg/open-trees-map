@@ -16,4 +16,9 @@ class Baum extends Model
     {
         return $this->hasMany(BaumBilder::class);
     }
+
+    public function Baumart()
+    {
+        return $this->belongsTo(Baumart::class);
+    }
 }

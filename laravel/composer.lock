@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb635b68d3f70c50ac6c4fa407ae3979",
+    "content-hash": "b6a001baab6950be41a6c90a639bfa12",
     "packages": [
         {
             "name": "brick/math",
@@ -2601,6 +2601,46 @@
             "time": "2023-02-08T01:06:31+00:00"
         },
         {
+            "name": "phayes/geophp",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phayes/geoPHP.git",
+                "reference": "015404e85b602e0df1f91441f8db0f9e98f7e567"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phayes/geoPHP/zipball/015404e85b602e0df1f91441f8db0f9e98f7e567",
+                "reference": "015404e85b602e0df1f91441f8db0f9e98f7e567",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "geoPHP.inc"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2 or New-BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Hayes"
+                }
+            ],
+            "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
+            "homepage": "https://github.com/phayes/geoPHP",
+            "support": {
+                "issues": "https://github.com/phayes/geoPHP/issues",
+                "source": "https://github.com/phayes/geoPHP/tree/master"
+            },
+            "time": "2014-12-02T06:11:22+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.9.1",
             "source": {
@@ -3705,6 +3745,77 @@
                 "source": "https://github.com/socialiteproviders/providers"
             },
             "time": "2023-03-02T09:58:36+00:00"
+        },
+        {
+            "name": "spinen/laravel-geometry",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spinen/laravel-geometry.git",
+                "reference": "830d8446847889d4cc00bb4893a51d9921aa125a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spinen/laravel-geometry/zipball/830d8446847889d4cc00bb4893a51d9921aa125a",
+                "reference": "830d8446847889d4cc00bb4893a51d9921aa125a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~8|~9|~10",
+                "illuminate/support": "~8|~9|~10",
+                "phayes/geophp": "~1.2",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.6",
+                "mockery/mockery": "^1.5.1",
+                "phpunit/phpunit": "^9.6.5",
+                "psy/psysh": "^0.11.1",
+                "symfony/var-dumper": "^6.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spinen\\Geometry\\GeometryServiceProvider"
+                    ],
+                    "aliases": {
+                        "Geo": "Spinen\\Geometry\\GeometryFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spinen\\Geometry\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thai-Son Le",
+                    "email": "thaison.le@spinen.com"
+                },
+                {
+                    "name": "Jimmy Puckett",
+                    "email": "jimmy.puckett@spinen.com"
+                }
+            ],
+            "description": "Wrapper over the geoPHP Class to make it integrate with Laravel better.",
+            "keywords": [
+                "geoPHP",
+                "geometry",
+                "laravel",
+                "library",
+                "spinen"
+            ],
+            "support": {
+                "issues": "https://github.com/spinen/laravel-geometry/issues",
+                "source": "https://github.com/spinen/laravel-geometry/tree/2.6.0"
+            },
+            "time": "2023-03-14T02:22:11+00:00"
         },
         {
             "name": "symfony/console",

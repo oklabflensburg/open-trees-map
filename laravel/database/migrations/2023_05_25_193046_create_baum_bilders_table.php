@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('filename');
             $table->integer('filegroesse');
             $table->bigInteger('user_id')->references('id')->on('users');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

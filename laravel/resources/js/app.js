@@ -16,7 +16,7 @@ Alpine.start();
 
 
 // fetch('/data/baumkataster_bonn.updated.geojson', {
-fetch('/storage/baumkataster_gelsenkirchen.geojson', {
+fetch('/testdata.geojson', {
     method: 'GET'
 })
     .then((response) => {
