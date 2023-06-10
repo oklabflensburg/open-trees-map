@@ -11,6 +11,8 @@ class BaumBilder extends Model
 {
     use HasFactory;
 
+    protected $table = 'baumbilder';
+
     public function Baum(): BelongsTo
     {
         return $this->belongsTo(Baum::class);

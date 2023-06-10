@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('baums', function (Blueprint $table) {
+        Schema::create('baeume', function (Blueprint $table) {
             $table->id();
             $table->string('ort');
-            $table->bigInteger('baumart_id')->references('id')->on('baumarts');
+            $table->bigInteger('baumart_id')->references('id')->on('baumarten');
             $table->point('standort'); // @TODO: check if this is the right type
             $table->string('model');
             $table->integer('pflanzjahr');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('baums');
+        Schema::dropIfExists('baeume');
     }
 };

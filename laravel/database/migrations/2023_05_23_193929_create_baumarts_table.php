@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('baumarts', function (Blueprint $table) {
+        Schema::create('baumarten', function (Blueprint $table) {
             $table->id();
             $table->string('latein');
             $table->string('deutsch')->nullable();
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('baumarts');
+        Schema::dropIfExists('baumarten');
     }
 };

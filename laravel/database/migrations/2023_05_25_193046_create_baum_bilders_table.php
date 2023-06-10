@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('baum_bilders', function (Blueprint $table) {
+        Schema::create('baumbilder', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('baum_id')->references('id')->on('baums');
+            $table->bigInteger('baum_id')->references('id')->on('baeume');
             $table->string('filename');
             $table->integer('filegroesse');
-            //$table->bigInteger('user_id')->references('id')->on('users');
+            $table->bigInteger('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('baum_bilders');
+        Schema::dropIfExists('baumbilder');
     }
 };

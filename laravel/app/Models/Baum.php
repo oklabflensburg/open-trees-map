@@ -10,6 +10,8 @@ class Baum extends Model
 {
     use HasFactory;
 
+    protected $table = 'baeume';
+
     public function Bilder()
     {
         return $this->hasMany(BaumBilder::class);
