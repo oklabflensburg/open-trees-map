@@ -1,5 +1,5 @@
 // fetch('/data/baumkataster_bonn.updated.geojson', {
-fetch('/data/baumkataster_gelsenkirchen.geojson', {
+fetch('/data/baumkataster_flensburg.geojson', {
   method: 'GET'
 })
 .then((response) => {
