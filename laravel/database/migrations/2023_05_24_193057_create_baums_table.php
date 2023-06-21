@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('baeume', function (Blueprint $table) {
             $table->id();
-            $table->string('ort');
+            $table->string('gebiet');
+            $table->string('platz');
             $table->bigInteger('baumart_id')->references('id')->on('baumarten');
             $table->point('standort'); // @TODO: check if this is the right type
-            $table->string('model');
-            $table->integer('pflanzjahr');
-            $table->integer('umfang');
-            $table->integer('krone');
-            $table->integer('hoehe');
+            $table->string('baumnummer');
             $table->timestamps();
         });
     }

@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => \Carbon\Carbon::now(),
         ]);
         $baumart = \App\Models\Baumart::create([
-            'latein' => 'Test',
-            'deutsch' => 'Test',
-            'daenisch' => 'Test',
+            'latein' => 'Unbekannt',
+            'deutsch' => 'Unbekannt',
+            'daenisch' => 'Unbekannt',
         ]);
-        $baum = \App\Models\Baum::create([
+        /*$baum = \App\Models\Baum::create([
             'ort' => 'Test Ort',
             'baumart_id' => $baumart->id,
             'standort' => \Illuminate\Support\Facades\DB::raw('ST_GeomFromText(\'POINT(55.676098 12.568337)\')'),
@@ -48,6 +48,6 @@ class DatabaseSeeder extends Seeder
             'filename' => 'test.jpg',
             'filegroesse' => 1000,
             'status' => 1,
-        ]);
+        ]);*/
     }
 }

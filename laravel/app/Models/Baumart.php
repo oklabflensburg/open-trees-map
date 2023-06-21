@@ -10,4 +10,10 @@ class Baumart extends Model
     use HasFactory;
 
     protected $table = 'baumarten';
+
+    protected $fillable = [
+        'latein',
+        'deutsch',
+        'daenisch',
+    ];
 }

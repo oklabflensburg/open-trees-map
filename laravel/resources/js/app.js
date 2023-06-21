@@ -33,6 +33,7 @@ fetch('/testdata.geojson', {
 const map = L.map('map').setView([54.7836, 9.4321], 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//L.tileLayer('http://127.0.0.1:8900/services/planet/map/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);

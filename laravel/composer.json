@@ -12,6 +12,8 @@
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.8",
         "phayes/geophp": "^1.2",
+        "php-coord/php-coord": "^5.4",
+        "proj4php/proj4php": "^2.0",
         "socialiteproviders/apple": "^5.5",
         "socialiteproviders/facebook": "^4.1",
         "socialiteproviders/github": "^4.1",
