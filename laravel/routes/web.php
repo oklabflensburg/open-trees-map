@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/about', [IndexController::class, 'about']);
-Route::post('/imageupload', [TreeController::class, 'imageupload'])->name('imageupload');
+
 Route::get('/testdata.geojson', [TreeController::class, 'test'])->name('testdata');
 Route::get('/baum/{baum}', [TreeController::class, 'show'])->name('baum.show');
 
@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Bilder Upload zum Baum
+    Route::post('/imageupload', [TreeController::class, 'imageupload'])->name('imageupload');
 });
 
 require __DIR__.'/auth.php';

@@ -33,7 +33,7 @@ fetch('/testdata.geojson', {
 const map = L.map('map').setView([54.7836, 9.4321], 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//L.tileLayer('http://127.0.0.1:8900/services/planet/map/{z}/{x}/{y}.png', {
+//L.tileLayer('http://127.0.0.1:8900/services/dach/tiles/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
@@ -98,6 +98,7 @@ function addData(data) {
                 document.getElementById('scope').innerHTML = scope || '---';
                 document.getElementById('crown').innerHTML = crown || '---';
                 document.getElementById('height').innerHTML = height || '---';
+                document.getElementById('baum_id').value = e.target.feature.properties.id;
                 // Get Data from Database
                 fetch('/baum/' + e.target.feature.properties.id, {
                     method: 'GET'

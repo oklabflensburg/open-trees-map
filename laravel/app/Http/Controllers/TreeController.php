@@ -4,19 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\File;
-use Illuminate\Validation\Rule;
 use App\Models\Baum;
 use App\Models\BaumBilder;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Session;
 use geoPHP;
-use proj4php\Proj4php;
-use proj4php\Proj;
-use proj4php\Point;
-use PHPCoord\UTMRef;
+use Illuminate\Support\Facades\Storage
 
 
 class TreeController extends Controller
@@ -27,14 +21,19 @@ class TreeController extends Controller
         $filename = Str::uuid();
         $fileR = $request->file("file");
         $ext = $fileR->extension();
-        $fileR->storeAs('/' . $filename . '.' . $ext);
-        Session::flash('status', 'Danke für den Upload');
-        return back();
-        /*$file = new BaumBilder();
+        $fileR->storePubliclyAs('public/' . $filename . '.' . $ext);
+        $file = new BaumBilder();
         $file->filename = $filename . '.' . $ext;
         $file->user_id = Auth::id();
-        $file->size = $fileR->getSize();
-        $file->save();*/
+        $file->baum_id = $request->baum_id;
+        $file->filegroesse = $fileR->getSize();
+        if ($file->save()) {
+            Session::flash('status', 'Danke für den Upload');
+        } else {
+            // Lösche File wieder weil DB Eintrag nicht möglich war
+            Storage::delete('public/' . $filename . '.' . $ext);
+        }
+        return back();
     }
 
     public function test(Request $request)
@@ -43,34 +42,6 @@ class TreeController extends Controller
         // Vielleicht kann man das auch mit Eloquent lösen, aber ich habe es nicht hinbekommen
         $baeume = Baum::with('baumart')->selectRaw('*, ST_AsText(standort) as point')->get();
         $data = [];
-
-
-        /*$proj4 = new Proj4php();
-
-        // Create two different projections.
-        $projVon    = new Proj('EPSG:25832', $proj4);
-        $projZu  = new Proj('EPSG:4326', $proj4);
-
-        // Create a point.
-        $pointSrc = new Point(6.07041046782e+06, 3.52716721416e+06, $projVon);
-        //$pointSrc = new Point(3.52716721416e+06, 6.07041046782e+06,$projVon);
-        echo "Source: " . $pointSrc->toShortString() . " in EPSG:25832 <br>";
-
-        // Transform the point between datums.
-        $pointDest = $proj4->transform($projZu, $pointSrc);
-        echo "Conversion: " . $pointDest->toShortString() . " in WGS84<br><br>";
-        dd($pointSrc, $pointDest);
-        */
-        /*$utm = new UTMRef(6.07041046782e+06, 3.52716721416e+06, '32U');
-        // Wandle die Koordinaten in das Lat-Lon-Format (EPSG:4326) um
-        $latLon = $utm->toLatLng();
-
-        // Hole die transformierten Koordinaten
-        $latitude = $latLon->getLat();
-        $longitude = $latLon->getLng();
-
-        dd($latitude, $longitude);*/
-
         foreach ($baeume as $baum) {
             // Point von WKT in coords umwandeln mit geoPHP
             $point = geoPHP::load($baum->point, 'wkt');

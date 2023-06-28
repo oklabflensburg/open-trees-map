@@ -23,6 +23,7 @@ class ImageUploadRequest extends FormRequest
     {
         return [
             'file' => 'required|image|min:20|max:4096',
+            'baum_id' => 'required|integer|exists:baeume,id',
         ];
     }
 }

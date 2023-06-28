@@ -26,6 +26,7 @@
                     <div id="height"></div>
                     <form action="{{ route('imageupload') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="baum_id" id="baum_id" value="">
                         <input type="file" id="file" name="file" capture accept="image/*">
                         <button class="btn" type="submit">Absenden</button>
                     </form>
