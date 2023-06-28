@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Session;
 use geoPHP;
-use Illuminate\Support\Facades\Storage
+use Illuminate\Support\Facades\Storage;
 
 
 class TreeController extends Controller
