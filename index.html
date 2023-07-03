@@ -5,79 +5,69 @@
     <title>Baumkataster Flensburg</title>
     <meta content="Das Baumkataster in Flensburg markiert die Straßenbäume und ist eine wichtige Grundlage für den Schutz und die Pflege der Bäume. Erfahren Sie mehr über das Kataster und die Bedeutung der Straßenbäume in Flensburg" name="description">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-    <link crossorigin="" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-          rel="stylesheet">
+    <link crossorigin="" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" rel="stylesheet">
     <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" rel="stylesheet">
     <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" rel="stylesheet">
     <link href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css" rel="stylesheet">
     <link href="main.css" rel="stylesheet">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet-src.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
 </head>
 <body>
-<div class="h-screen overflow-auto bg-gray-300">
-    <div class="md:flex">
-    <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-96 overflow-hidden" id="map"></div>
-    <div class="w-full sm:w-4/12 md:w-5/12 lg:w-3/12 sm:overflow-scroll bg-gray-100" id="filter">
-        <div class="bg-gray-300">
-            <div class="hidden py-2 px-3" id="details">
-                <div class="font-bold">Ort</div>
-                <div class="mb-2" id="place"></div>
-                <div class="font-bold">Baumart</div>
-                <div class="mb-2" id="type"></div>
-                <div class="font-bold">Baummodel</div>
-                <div class="mb-2" id="model"></div>
-                <div class="font-bold">Pflanzjahr</div>
-                <div class="mb-2" id="plant"></div>
-                <div class="font-bold">Baumumfang</div>
-                <div class="mb-2" id="scope"></div>
-                <div class="font-bold">Baumkrone</div>
-                <div class="mb-2" id="crown"></div>
-                <div class="font-bold">Baumhöhe</div>
-                <div id="height"></div>
+    <div class="h-screen overflow-auto bg-gray-300">
+        <div class="md:flex">
+            <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-96 overflow-hidden" id="map"></div>
+            <div class="w-full sm:w-4/12 md:w-5/12 lg:w-3/12 sm:overflow-scroll bg-gray-100" id="filter">
+                <div class="bg-gray-300">
+                    <div class="hidden py-2 px-3" id="details">
+                        <div class="font-bold">
+                            Ort
+                        </div>
+                        <div class="mb-2" id="place"></div>
+                        <div class="font-bold">
+                            Baumart
+                        </div>
+                        <div class="mb-2" id="type"></div>
+                        <div class="font-bold">
+                            Baummodel
+                        </div>
+                        <div class="mb-2" id="model"></div>
+                        <div class="font-bold">
+                            Pflanzjahr
+                        </div>
+                        <div class="mb-2" id="plant"></div>
+                        <div class="font-bold">
+                            Baumumfang
+                        </div>
+                        <div class="mb-2" id="scope"></div>
+                        <div class="font-bold">
+                            Baumkrone
+                        </div>
+                        <div class="mb-2" id="crown"></div>
+                        <div class="font-bold">
+                            Baumhöhe
+                        </div>
+                        <div id="height"></div>
+                    </div>
+                </div>
+                <div class="py-2 px-3">
+                    <h1 class="text-2xl md:text-3xl font-bold">Baumkataster</h1>
+                    <h2 class="text-xl md:text-2xl mb-4 md:mb-8">Stadt Flensburg</h2>
+                    <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Datenquelle</h3>
+                    <p class="font-mono mb-4 md:mb-8">Das Straßenbaumkataster der Stadt Flensburg wird von dem Technischen Betriebszentrum (TBZ Flensburg) im SHP Format über das OpenData Portal Schleswig-Holstein zum <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11" target="_blank">Download</a> angeboten.</p>
+                    <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Interaktive Karte</h3>
+                    <p class="font-mono mb-4 md:mb-8">Beispielanwendung einer Baumkartasterkarte mit Daten der Stadt Flensburg.</p>
+                    <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Quellcode</h3>
+                    <p class="font-mono"><a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://github.com/oklabflensburg/open-trees-map" target="_blank">GitHub</a></p>
+                </div>
             </div>
         </div>
-        <div class="py-2 px-3">
-            <h1 class="text-2xl md:text-3xl font-bold">
-                Baumkataster
-            </h1>
-            <h2 class="text-xl md:text-2xl mb-4 md:mb-8">
-                Stadt Flensburg
-            </h2>
-            <h3 class="text-xl md:text-2xl mb-1 md:mb-3">
-                Datenquelle
-            </h3>
-            <p class="font-mono mb-4 md:mb-8">Das Straßenbaumkataster der Stadt
-            Flensburg wird von dem Technischen Betriebszentrum (TBZ Flensburg)
-            im SHP Format über das OpenData Portal Schleswig-Holstein zum <a
-                        class="text-blue-600 hover:text-blue-500 focus:text-blue:500"
-                        href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11"
-                        target="_blank">Download</a> angeboten.
-            </p>
-            <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Interaktive Karte</h3>
-            <p class="font-mono mb-4 md:mb-8">Beispielanwendung einer
-            Baumkartasterkarte mit Daten der Stadt Flensburg.</p>
-            <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Quellcode</h3>
-            <p class="font-mono"><a class="text-blue-600 hover:text-blue-500 focus:text-blue:500"
-                                    href="https://github.com/oklabflensburg/open-trees-map"
-                                    target="_blank">GitHub</a>
-            </p>
-        </div>
-  </div>
+        <footer class="flex justify-center items-center h-[4vh] text-sm">
+            <a class="inline-block text-gray-600 hover:text-gray-900 focus:text-gray-900" href="impressum.html">Impressum</a> <span class="inline-block text-gray-600 px-3">|</span> <a class="inline-block text-gray-600 hover:text-gray-900 focus:text-gray-900" href="impressum.html#privacypolicy">Datenschutzerklärung</a> <span class="inline-block text-gray-600 px-3">|</span> <a class="inline-block text-gray-600 hover:text-gray-900 focus:text-gray-900" href="lizenz.html">Lizenz</a>
+        </footer>
     </div>
-    <footer class="flex justify-center items-center h-[4vh] text-sm">
-      <a class="inline-block text-gray-600 hover:text-gray-900
-        focus:text-gray-900" href="impressum.html">Impressum</a>
-      <span class="inline-block text-gray-600 px-3"> | </span>
-      <a class="inline-block text-gray-600 hover:text-gray-900
-         focus:text-gray-900"
-        href="impressum.html#privacypolicy">Datenschutzerklärung</a>
-    </footer>
-</div>
-<script src="main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
