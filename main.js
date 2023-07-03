@@ -62,7 +62,7 @@ function addData(data) {
                     left: 0
                 });
 
-                map.setView(e.latlng, 19);
+                map.setView(e.latlng, 20);
 
                 let place = e.target.feature.properties.place
                 let type = e.target.feature.properties.type
@@ -88,10 +88,10 @@ function addData(data) {
             const customIcon = L.icon({
                 iconUrl: '/static/marker-icon-green.png',
                 shadowUrl: '/static/marker-shadow.png',
-                iconSize: [25, 41],
+                iconSize: [31, 41],
                 iconAnchor: [12, 41],
-                tooltipAnchor: [0, -38],
-                shadowSize: [41, 41]
+                tooltipAnchor: [4, -41],
+                shadowSize: [45, 41]
             });
 
             return L.marker(latlng, {icon: customIcon}).bindTooltip(label, {
