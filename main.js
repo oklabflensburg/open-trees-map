@@ -62,7 +62,7 @@ function addData(data) {
                     left: 0
                 });
 
-                map.setView(e.latlng, 20);
+                map.setView(e.latlng, 19)
 
                 let place = e.target.feature.properties.place
                 let type = e.target.feature.properties.type

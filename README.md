@@ -1,9 +1,13 @@
-# Baumkataster Karten
+# Baumkataster Flensburg
 
-Interaktive webbasierte Baumkataster Karten basierend auf Opendata 
+Interaktive webbasierte Baumkataster Karten basierend auf Daten des TBZ Flensburg
 
 
-![Screenshot Baumkataster Karte](https://raw.githubusercontent.com/oklabflensburg/open-trees-map/main/baumkataster_gelsenkirchen.png)
+![Screenshot Baumkataster Karte](https://raw.githubusercontent.com/oklabflensburg/open-trees-map/main/baumkataster_stadt_flensburg.png)
+
+
+## Haftungsausschluss
+Das OK Lab Flensburg hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service über über die Webseite [https://baumkataster-flensburg.de](https://baumkataster-flensburg.de) für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.
 
 
 ## Prerequisite
@@ -18,15 +22,15 @@ pip install -r requirements.txt
 ```
 
 
-## Datasources
+## Datenquelle
 
-- https://opendata.gelsenkirchen.de/sites/default/files/baumkataster_ge.csv
+- https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11
 
 
 ## Import GeoJSON
 
 ```
-ogr2ogr -f "PostgreSQL" PG:"dbname=postgis_db user=postgis_user password=postgis_password" "data/baumkataster_gelsenkirchen.geojson" -nln baumkataster_gelsenkirchen -overwrite
+ogr2ogr -f "PostgreSQL" PG:"dbname=database user=username password=password" "data/baumkataster_flensburg.geojson" -nln baumkataster_flensburg -overwrite
 ```
 
 
@@ -46,7 +50,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO postgis_user;
 GRANT USAGE, SELECT ON SEQUENCE tree_species_pkey_seq TO postgis_user;
 
 sudo chown user:postgres data/unknown_species.csv
-COPY (SELECT type FROM baumkataster_gelsenkirchen WHERE tkey IS NULL GROUP BY type) TO 'data/unknown_species.csv' WITH DELIMITER ',' CSV HEADER;
+COPY (SELECT type FROM baumkataster WHERE tkey IS NULL GROUP BY type) TO 'data/unknown_species.csv' WITH DELIMITER ',' CSV HEADER;
 sudo chown user:user data/unknown_species.csv
 ```
 
