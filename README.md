@@ -13,12 +13,8 @@ Das OK Lab Flensburg hostet die zum Download bereitgestellten Daten des TBZ Flen
 ## Prerequisite
 
 ```
-sudo apt install python3.10 virtualenv git
+sudo apt install python3 virtualenv git
 git clone https://github.com/oklabflensburg/open-trees-map.git
-cd open-trees-map
-virtualenv venv
-. venv/bin/activate
-pip install -r requirements.txt
 ```
 
 
@@ -27,27 +23,65 @@ pip install -r requirements.txt
 - https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11
 
 
-## Import GeoJSON
+## Convert latest Geojson
 
 ```
-ogr2ogr -f "PostgreSQL" PG:"dbname=database user=username password=password" "data/baumkataster_flensburg.geojson" -nln baumkataster_flensburg -overwrite
+cd open-trees-map/tools
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python convert_geojson.py ../data/baumkataster_flensburg.geojson OBJECT_ID TREE_TYPE type TRUNK_DIAMETER CROWN_DIAMETER TOTAL_HEIGHT PLANT_YEAR place
+deactivate
 ```
 
 
-## Import Baumarten
+## Import Baumkataster to PostgreSQL
 
 ```
-create table tree_species (pkey SERIAL PRIMARY KEY, species_latin varchar, species_german varchar);
-COPY tree_species(species_german, species_latin) FROM 'data/tree_species.csv' DELIMITERS ',' CSV HEADER;
+ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=postgres user=postgres password=postgres port=5433" "data/baumkataster_flensburg.updated.geojson" -nln tree_inventory -overwrite
+```
+
+Now we must add an extra column for the forgeign key
+
+```
+psql -U postgres -h localhost -d postgres -p 5433 -c "ALTER TABLE tree_inventory ADD COLUMN skey INTEGER;"
+```
+
+
+## Import Baumarten to PostgreSQL
+
+```sql
+CREATE TABLE tree_species (pkey SERIAL PRIMARY KEY, species_latin VARCHAR, species_german VARCHAR);
+COPY tree_species(species_latin, species_german) FROM '/your_path_here/open-trees-map/data/tree_species.csv' DELIMITERS ',' CSV HEADER;
+
+```
+
+
+## Example statistics
+
+```sql
+SELECT
+    ts.species_german,
+    ti.tree_species,
+    COUNT(*) AS amount
+FROM
+    tree_inventory AS ti
+LEFT JOIN
+    tree_species AS ts ON ts.species_latin = ti.tree_species
+GROUP BY
+    ti.tree_species,
+    ts.species_german
+ORDER BY
+    amount DESC;
 ```
 
 
 ## Export Baumarten
 
 ```
-GRANT USAGE ON SCHEMA public TO postgis_user;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO postgis_user;
-GRANT USAGE, SELECT ON SEQUENCE tree_species_pkey_seq TO postgis_user;
+GRANT USAGE ON SCHEMA public TO postgres;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO postgres;
+GRANT USAGE, SELECT ON SEQUENCE tree_species_pkey_seq TO postgres;
 
 sudo chown user:postgres data/unknown_species.csv
 COPY (SELECT type FROM baumkataster WHERE tkey IS NULL GROUP BY type) TO 'data/unknown_species.csv' WITH DELIMITER ',' CSV HEADER;
@@ -58,5 +92,5 @@ sudo chown user:user data/unknown_species.csv
 ## Dump Baumarten
 
 ```
-pg_dump -h localhost -p 5432 -U postgis_user -d postgis_db -t tree_species > tree_species.sql
+pg_dump -h localhost -p 5432 -U postgres -d postgis_db -t tree_species > tree_species.sql
 ```

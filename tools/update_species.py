@@ -3,11 +3,11 @@
 import os
 import psycopg2
 
-from os.path import join, dirname
+from pathlib import Path
 from dotenv import load_dotenv
 
 
-dotenv_path = join(f'{dirname(__file__)}/rest', '.env')
+dotenv_path = Path('../rest/.env')
 load_dotenv(dotenv_path)  
 
                                                                                 
@@ -20,13 +20,13 @@ conn = psycopg2.connect(
 )
 
 
-def update_species(cur, tkey, tspecies):
-    sql = 'UPDATE baumkataster_gelsenkirchen AS t SET tkey = %s WHERE t.type = %s'''
+def update_species(cur, skey, tspecies):
+    sql = 'UPDATE tree_inventory AS ti SET skey = %s WHERE ti.tree_species = %s'
     
     updated_rows = 0
     
     try:
-        cur.execute(sql, (tkey, tspecies))
+        cur.execute(sql, (skey, tspecies))
         updated_rows = cur.rowcount
         conn.commit()
         # cur.close()
@@ -40,10 +40,10 @@ def main():
     cur = conn.cursor()
 
     cur.execute('''
-                SELECT t.type, s.skey FROM baumkataster_gelsenkirchen AS t
-                JOIN tree_species AS s
-                ON s.species_latin = t.type
-                GROUP BY t.type, s.skey
+        SELECT ts.pkey, ts.species_latin
+        FROM tree_inventory AS ti
+        JOIN tree_species AS ts
+        ON ts.species_german = ti.tree_species
     ''')
 
     rows = cur.fetchall()
@@ -51,7 +51,8 @@ def main():
     for row in rows:
         print(row)
 
-        update_species(cur, row[1], row[0])
+        update_species(cur, row[0], row[1])
+
 
 if __name__ == '__main__':
     main()

@@ -11,8 +11,6 @@ def convert_projection(x, y):
 
     n = transformer.transform(x, y)
 
-    print(n)
-
 
 def write_dataset(file, row):
     with open(f'{file.split(".")[0]}.parsed.csv', 'a', newline='') as csvfile:
@@ -22,7 +20,7 @@ def write_dataset(file, row):
 
 @click.command()
 @click.argument('file')
-def read_dataset(file):
+def main(file):
     with open(file, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=';')
         next(reader)
@@ -30,9 +28,9 @@ def read_dataset(file):
         counter = 1
         
         for row in reader:
-            x = float(row[3].replace(',', '.'))
-            y = float(row[4].replace(',', '.'))
-            # convert_projection(x, y)
+            x = float(row[2].replace(',', '.'))
+            y = float(row[3].replace(',', '.'))
+            convert_projection(x, y)
 
             if len(row) == 0:
                 counter = counter + 1
@@ -42,4 +40,4 @@ def read_dataset(file):
 
 
 if __name__ == '__main__':
-    read_dataset()
+    main()
