@@ -7,21 +7,35 @@ Interaktive webbasierte Baumkataster Karten basierend auf Daten des TBZ Flensbur
 
 
 ## Haftungsausschluss
-Das OK Lab Flensburg hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service über über die Webseite [https://baumkataster-flensburg.de](https://baumkataster-flensburg.de) und stellt diese auf einer interaktiven Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.
 
+_Das OK Lab Flensburg hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service über über die Webseite [https://baumkataster-flensburg.de](https://baumkataster-flensburg.de) und stellt diese auf einer interaktiven Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr._
 
-## Prerequisite
-
-```
-sudo apt install python3 virtualenv git
-git clone https://github.com/oklabflensburg/open-trees-map.git
-```
 
 
 ## Datenquelle
 
 - https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11
 
+
+
+## Prerequisite
+
+Install system dependencies and clone repository
+
+```
+sudo apt install git git-lfs virtualenv python3 python3-pip postgresql-15 postgresql-15-postgis-3 postgis
+git clone https://github.com/oklabflensburg/open-trees-map.git
+```
+
+Create dot `.env` file inside root directory. Make sure to add the following content repaced by your actual values
+
+```
+DB_PASS=postgres
+DB_HOST=localhost
+DB_USER=postgres
+DB_NAME=postgres
+DB_PORT=5432
+```
 
 
 ## Update repository
@@ -64,21 +78,16 @@ cd tools
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python insert_species.py ../data/tree_species.csv
 python insert_inventory.py ../data/baumkataster_flensburg.updated.geojson
+python update_species.py
 deactivate
 ```
 
 
-
-## Import Baumarten to PostgreSQL
-
-```sql
-CREATE TABLE tree_species (pkey SERIAL PRIMARY KEY, species_latin VARCHAR, species_german VARCHAR);
-COPY tree_species(species_latin, species_german) FROM '/your_path_here/open-trees-map/data/tree_species.csv' DELIMITERS ',' CSV HEADER;
-```
-
-
 ## Example statistics
+
+Show how many trees are from the same species
 
 ```sql
 SELECT
@@ -115,3 +124,8 @@ sudo chown user:user data/unknown_species.csv
 ```
 pg_dump -h localhost -p 5432 -U postgres -d postgis_db -t tree_species > tree_species.sql
 ```
+
+
+## TODO
+
+- Remove duplicates from `data/tree_species.csv`
