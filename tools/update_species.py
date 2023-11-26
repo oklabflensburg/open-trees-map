@@ -40,7 +40,7 @@ def main():
     cur = conn.cursor()
 
     cur.execute('''
-        SELECT ts.pkey, ts.species_latin
+        SELECT ts.id, ts.species_latin
         FROM tree_inventory AS ti
         JOIN tree_species AS ts
         ON ts.species_german = ti.tree_species

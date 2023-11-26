@@ -23,10 +23,30 @@ git clone https://github.com/oklabflensburg/open-trees-map.git
 - https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11
 
 
-## Convert latest Geojson
+
+## Update repository
 
 ```
-cd open-trees-map/tools
+git pull
+git lfs pull
+```
+
+
+## Create SQL schema
+
+Run sql statements inside `open-trees-map` root directory
+
+```
+sudo -i -Hu postgres psql -U postgres -h localhost -d postgres -p 5432 < data/baumkataster_schema.sql
+```
+
+
+## Convert latest Geojson
+
+Notice, this must only be done when updating dataset
+
+```
+cd tools
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -35,17 +55,19 @@ deactivate
 ```
 
 
-## Import Baumkataster to PostgreSQL
+## Import inventory
+
+Required when you want to fetch data via API
 
 ```
-ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=postgres user=postgres password=postgres port=5433" "data/baumkataster_flensburg.updated.geojson" -nln tree_inventory -overwrite
+cd tools
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python insert_inventory.py ../data/baumkataster_flensburg.updated.geojson
+deactivate
 ```
 
-Now we must add an extra column for the forgeign key
-
-```
-psql -U postgres -h localhost -d postgres -p 5433 -c "ALTER TABLE tree_inventory ADD COLUMN skey INTEGER;"
-```
 
 
 ## Import Baumarten to PostgreSQL
@@ -53,7 +75,6 @@ psql -U postgres -h localhost -d postgres -p 5433 -c "ALTER TABLE tree_inventory
 ```sql
 CREATE TABLE tree_species (pkey SERIAL PRIMARY KEY, species_latin VARCHAR, species_german VARCHAR);
 COPY tree_species(species_latin, species_german) FROM '/your_path_here/open-trees-map/data/tree_species.csv' DELIMITERS ',' CSV HEADER;
-
 ```
 
 
