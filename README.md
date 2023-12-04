@@ -72,6 +72,22 @@ deactivate
 ```
 
 
+## Merge inventory fellings
+
+Notice, this must only be done when felling of trees dataset has been updated
+
+> Note, calling `merge_fellings.py` has two parameters, first one is the path the fellings file, most likely a csv file. The second one is the path of the inventory file most likely a geojson file. Make sure to verify that both files are valid and test results.
+
+```
+cd tools
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python merge_fellings.py ../data/baumfaellungen_flensburg_2023.csv ../data/baumkataster_flensburg.geojson
+deactivate
+```
+
+
 ## Convert latest Geojson
 
 Notice, this must only be done when updating dataset
