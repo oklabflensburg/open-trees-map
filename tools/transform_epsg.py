@@ -37,8 +37,8 @@ def main(src, in_epsg, out_epsg):
         next(reader)
         
         for row in reader:
-            x = float(row[0].replace(',', '.'))
-            y = float(row[1].replace(',', '.'))
+            x = float(row[3].replace(',', '.'))
+            y = float(row[4].replace(',', '.'))
             
             n = transform_projection(x, y, in_epsg, out_epsg)
             c = [n[0], n[1]]
