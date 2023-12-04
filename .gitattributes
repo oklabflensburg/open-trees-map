@@ -32,4 +32,3 @@
 *.webp binary
 *.woff2 binary
 *.geojson filter=lfs diff=lfs merge=lfs -text
-*.csv filter=lfs diff=lfs merge=lfs -text
