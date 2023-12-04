@@ -55,6 +55,23 @@ sudo -i -Hu postgres psql -U postgres -h localhost -d postgres -p 5432 < data/ba
 ```
 
 
+
+## Transform projection
+
+Notice, this must only be done when felling of trees dataset added
+
+> Note, calling `transform_epsg.py` has three parameters, first is the source second the source projection EPSG number and last the destination EPSG number. Make sure to verify that your EPSG number are the correct one.
+
+```
+cd tools
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python transform_epsg.py ../data/baumfaellungen_flensburg_2023.csv 31467 4326
+deactivate
+```
+
+
 ## Convert latest Geojson
 
 Notice, this must only be done when updating dataset
