@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS tree_inventory (
   trunk_diameter NUMERIC,
   crown_diameter NUMERIC,
   total_height NUMERIC,
-  plant_year INT,
+  felling_year DATE,
+  plant_year DATE,
   location VARCHAR,
   wkb_geometry GEOMETRY(GEOMETRY, 4326)
 );
