@@ -37,28 +37,38 @@ def retrieve_features(cur, features):
         insert_object(cur, properties, feature['geometry'])
 
 
+def check_property(properties, key):
+    if key in properties and properties[key]:
+        value = properties[key]
+    else:
+        value = None
+
+    return value
+
+
 def insert_object(cur, properties, geometry):
-    object_id = properties['object_id'] if properties['object_id'] else None
-    tree_type = properties['tree_type'] if properties['tree_type'] else None
-    tree_species = properties['tree_species'] if properties['tree_species'] else None
-    trunk_diameter = properties['trunk_diameter'] if properties['trunk_diameter'] else None
-    crown_diameter = properties['crown_diameter'] if properties['crown_diameter'] else None
-    total_height = properties['total_height'] if properties['total_height'] else None
-    plant_year = properties['plant_year'] if properties['plant_year'] else None
-    location = properties['location'] if properties['location'] else None
+    object_id = check_property(properties, 'object_id')
+    tree_type = check_property(properties, 'tree_type')
+    tree_species = check_property(properties, 'tree_species')
+    trunk_diameter = check_property(properties, 'trunk_diameter')
+    crown_diameter = check_property(properties, 'crown_diameter')
+    total_height = check_property(properties, 'total_height')
+    felling_year = check_property(properties, 'felling_year')
+    plant_year = check_property(properties, 'plant_year')
+    place = check_property(properties, 'place')
 
     g = Point(shape(geometry))
     wkb_geometry = wkb.dumps(g, hex=True, srid=4326)
 
     sql = '''
         INSERT INTO tree_inventory (object_id, tree_type, tree_species, trunk_diameter,
-        crown_diameter, total_height, plant_year, location, wkb_geometry)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING RETURNING id
+        crown_diameter, total_height, felling_year, plant_year, place, wkb_geometry)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     '''
 
     try:
         cur.execute(sql, (object_id, tree_type, tree_species, trunk_diameter,
-            crown_diameter, total_height, plant_year, location, wkb_geometry))
+            crown_diameter, total_height, felling_year, plant_year, place, wkb_geometry))
     except UniqueViolation as e:
         print(e)
         return

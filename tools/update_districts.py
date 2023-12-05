@@ -24,11 +24,11 @@ except Exception as e:
     raise
 
 
-def update_inventory(cur, species_id, inventory_id):
-    sql = 'UPDATE tree_inventory SET species_id = %s WHERE id = %s'
+def update_inventory(cur, inventory_id, district_id):
+    sql = 'UPDATE tree_inventory SET district_id = %s WHERE id = %s'
     
     try:
-        cur.execute(sql, (species_id, inventory_id))
+        cur.execute(sql, (district_id, inventory_id))
     except (Exception, psycopg2.DatabaseError) as e:
         print(e)
 
@@ -37,10 +37,10 @@ def main():
     cur = conn.cursor()
 
     cur.execute('''
-        SELECT ts.id, ti.id
+        SELECT ti.id AS inventory_id, d.id AS district_id
         FROM tree_inventory AS ti
-        JOIN tree_species AS ts
-        ON LOWER(ts.species_latin) = LOWER(ti.tree_species)
+        JOIN districts AS d
+        ON ST_Contains(d.wkb_geometry, ti.wkb_geometry)
     ''')
 
     rows = cur.fetchall()
