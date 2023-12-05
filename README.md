@@ -113,6 +113,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 python insert_species.py ../data/tree_species.csv
 python insert_inventory.py ../data/baumkataster_flensburg.updated.geojson
+python update_districts.py
 python update_species.py
 deactivate
 ```
