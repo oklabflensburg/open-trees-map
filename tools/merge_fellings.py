@@ -57,11 +57,12 @@ def main(src_fellings, src_inventory):
         hochwert = feature['properties']['hochwert']
         rechtswert = feature['properties']['rechtswert']
 
-        for row in fellings:
+        for idx, row in reversed(list(enumerate(fellings))):
             if hochwert == row[0] and rechtswert == row[1]:
                 iso_date = datetime.now().replace(microsecond=0).isoformat()
                 feature['properties']['felling_date'] = iso_date
                 detected.append(feature)
+                fellings.pop(idx)
 
     write_json(src_inventory, inventory)
 

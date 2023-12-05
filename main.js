@@ -1,5 +1,5 @@
 // fetch('/data/baumkataster_bonn.updated.geojson', {
-fetch('/data/baumkataster_flensburg.geojson', {
+fetch('/data/baumkataster_flensburg.updated.geojson', {
   method: 'GET'
 })
 .then((response) => {
@@ -48,6 +48,26 @@ osmGeocoder.on('markgeocode', e => {
 });
 
 
+const customIcon = L.icon({
+    iconUrl: '/static/marker-icon-green.png',
+    shadowUrl: '/static/marker-shadow.png',
+    iconSize: [31, 41],
+    iconAnchor: [12, 41],
+    tooltipAnchor: [4, -41],
+    shadowSize: [45, 41]
+});
+
+
+const blackIcon = L.icon({
+    iconUrl: '/static/marker-icon-black.png',
+    shadowUrl: '/static/marker-shadow.png',
+    iconSize: [31, 41],
+    iconAnchor: [12, 41],
+    tooltipAnchor: [4, -41],
+    shadowSize: [45, 41]
+});
+
+
 function addData(data) {
     let markers = L.markerClusterGroup({
         zoomToBoundsOnClick: true,
@@ -57,42 +77,55 @@ function addData(data) {
     const geojsonGroup = L.geoJSON(data, {
         onEachFeature: function (feature, layer) {
             layer.on('click', function (e) {
-                document.getElementById('filter').scrollTo({
+                document.querySelector('#filter').scrollTo({
                     top: 0,
                     left: 0
                 });
 
                 map.setView(e.latlng, 19)
 
-                let place = e.target.feature.properties.place
-                let type = e.target.feature.properties.type
-                let model = e.target.feature.properties.model
-                let plant = e.target.feature.properties.plant
-                let scope = e.target.feature.properties.scope
-                let crown = e.target.feature.properties.crown
-                let height = e.target.feature.properties.height
+                document.querySelector('#details').classList.remove('hidden');
 
-                document.getElementById('details').classList.remove('hidden');
-                document.getElementById('place').innerHTML = place || '---';
-                document.getElementById('type').innerHTML = type || '---';
-                document.getElementById('model').innerHTML = model || '---';
-                document.getElementById('plant').innerHTML = plant || '---';
-                document.getElementById('scope').innerHTML = scope || '---';
-                document.getElementById('crown').innerHTML = crown || '---';
-                document.getElementById('height').innerHTML = height || '---';
+                if ('tree_type' in e.target.feature.properties) {
+                    document.querySelector('#place').innerHTML = e.target.feature.properties.tree_type
+                }
+
+                if ('tree_species' in e.target.feature.properties) {
+                    document.querySelector('#type').innerHTML = e.target.feature.properties.tree_species
+                }
+
+                if ('trunk_diameter' in e.target.feature.properties) {
+                    document.querySelector('#model').innerHTML = e.target.feature.properties.trunk_diameter
+                }
+
+                if ('crown_diameter' in e.target.feature.properties) {
+                    document.querySelector('#plant').innerHTML = e.target.feature.properties.crown_diameter
+                }
+
+                if ('total_height' in e.target.feature.properties) {
+                    document.querySelector('#scope').innerHTML = e.target.feature.properties.total_height
+                }
+
+                if ('felling_date' in e.target.feature.properties) {
+                    document.querySelector('#crown').innerHTML = e.target.feature.properties.felling_date
+                }
+
+                if ('plant_year' in e.target.feature.properties) {
+                    document.querySelector('#height').innerHTML = e.target.feature.properties.plant_year
+                }
+
+                if ('place' in e.target.feature.properties) {
+                    document.querySelector('#place').innerHTML = e.target.feature.properties.place
+                }
             })
         },
         pointToLayer: function (feature, latlng) {
-            const label = String(feature.properties.type)
+            const label = String(feature.properties.tree_species)
+            let icon = customIcon
 
-            const customIcon = L.icon({
-                iconUrl: '/static/marker-icon-green.png',
-                shadowUrl: '/static/marker-shadow.png',
-                iconSize: [31, 41],
-                iconAnchor: [12, 41],
-                tooltipAnchor: [4, -41],
-                shadowSize: [45, 41]
-            });
+            if ('felling_date' in feature.properties) {
+                icon = blackIcon
+            }
 
             return L.marker(latlng, {icon: customIcon}).bindTooltip(label, {
                 permanent: false,
