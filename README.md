@@ -119,9 +119,7 @@ deactivate
 ```
 
 
-## Example statistics
-
-Show how many trees are from the same species
+## How many trees from the same species
 
 ```sql
 SELECT
@@ -137,6 +135,45 @@ GROUP BY
     ts.species_german
 ORDER BY
     amount DESC;
+```
+
+
+## How many trees per district?
+
+This query retrieves data from the tree inventory, calculates the count of trees in each district, and computes the district's area in square kilometers.
+
+```sql
+SELECT
+    d.name AS district_name,
+    COUNT(*) AS district_count,
+    ROUND(CAST(ST_Area(d.wkb_geometry::geography) / 1000000 AS numeric), 2) AS district_area
+FROM
+    tree_inventory AS ti
+JOIN
+    districts AS d ON d.id = ti.district_id
+GROUP BY
+    ti.district_id, d.name, d.wkb_geometry
+ORDER BY
+    district_count DESC;
+```
+
+```
+  district_name   | district_count | district_area
+------------------+----------------+---------------
+ Friesischer Berg |           3215 |          4.23
+ Westliche Höhe   |           2762 |          4.68
+ Weiche           |           1751 |          8.04
+ Mürwik           |           1610 |          6.54
+ Nordstadt        |           1588 |          4.07
+ Fruerlund        |           1565 |          2.51
+ Tarup            |           1502 |          5.27
+ Engelsby         |           1154 |          3.75
+ Südstadt         |           1139 |          5.17
+ Jürgensby        |            944 |          1.41
+ Sandberg         |            718 |          2.33
+ Altstadt         |            410 |          0.57
+ Neustadt         |            320 |          0.47
+(13 rows)
 ```
 
 
