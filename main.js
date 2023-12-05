@@ -61,9 +61,9 @@ const customIcon = L.icon({
 const blackIcon = L.icon({
     iconUrl: '/static/marker-icon-black.png',
     shadowUrl: '/static/marker-shadow.png',
-    iconSize: [31, 41],
+    iconSize: [25, 41],
     iconAnchor: [12, 41],
-    tooltipAnchor: [4, -41],
+    tooltipAnchor: [2, -41],
     shadowSize: [45, 41]
 });
 
@@ -87,31 +87,32 @@ function addData(data) {
                 document.querySelector('#details').classList.remove('hidden');
 
                 if ('tree_type' in e.target.feature.properties) {
-                    document.querySelector('#place').innerHTML = e.target.feature.properties.tree_type
+                    document.querySelector('#treeType').innerHTML = e.target.feature.properties.tree_type
                 }
 
                 if ('tree_species' in e.target.feature.properties) {
-                    document.querySelector('#type').innerHTML = e.target.feature.properties.tree_species
+                    document.querySelector('#treeSpecies').innerHTML = e.target.feature.properties.tree_species
                 }
 
                 if ('trunk_diameter' in e.target.feature.properties) {
-                    document.querySelector('#model').innerHTML = e.target.feature.properties.trunk_diameter
+                    document.querySelector('#trunkDiameter').innerHTML = e.target.feature.properties.trunk_diameter
                 }
 
                 if ('crown_diameter' in e.target.feature.properties) {
-                    document.querySelector('#plant').innerHTML = e.target.feature.properties.crown_diameter
+                    document.querySelector('#crownDiameter').innerHTML = e.target.feature.properties.crown_diameter
                 }
 
                 if ('total_height' in e.target.feature.properties) {
-                    document.querySelector('#scope').innerHTML = e.target.feature.properties.total_height
+                    document.querySelector('#totalHeight').innerHTML = e.target.feature.properties.total_height
                 }
 
-                if ('felling_date' in e.target.feature.properties) {
-                    document.querySelector('#crown').innerHTML = e.target.feature.properties.felling_date
+                if ('felling_year' in e.target.feature.properties) {
+                    const fellingYear = e.target.feature.properties.felling_year
+                    document.querySelector('#fellingYear').innerHTML = `Hinweis: Gefällt ${fellingYear}`
                 }
 
                 if ('plant_year' in e.target.feature.properties) {
-                    document.querySelector('#height').innerHTML = e.target.feature.properties.plant_year
+                    document.querySelector('#plantYear').innerHTML = e.target.feature.properties.plant_year
                 }
 
                 if ('place' in e.target.feature.properties) {
@@ -120,14 +121,17 @@ function addData(data) {
             })
         },
         pointToLayer: function (feature, latlng) {
-            const label = String(feature.properties.tree_species)
+            let label = String(feature.properties.tree_species)
             let icon = customIcon
 
-            if ('felling_date' in feature.properties) {
+            if ('felling_year' in feature.properties) {
+                const fellingYear = feature.properties.felling_year
+
+                label = `Gefällt ${fellingYear}`
                 icon = blackIcon
             }
 
-            return L.marker(latlng, {icon: customIcon}).bindTooltip(label, {
+            return L.marker(latlng, {icon: icon}).bindTooltip(label, {
                 permanent: false,
                 direction: 'top'
             }).openTooltip();
