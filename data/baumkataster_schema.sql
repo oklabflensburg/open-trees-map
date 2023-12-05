@@ -7,16 +7,17 @@ DROP TABLE IF EXISTS tree_inventory CASCADE;
 
 CREATE TABLE IF NOT EXISTS tree_inventory (
   id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  skey INT REFERENCES tree_inventory (id),
+  species_id INT REFERENCES tree_inventory (id),
+  district_id INT REFERENCES districts (id),
   object_id INT,
   tree_type VARCHAR,
   tree_species VARCHAR,
   trunk_diameter NUMERIC,
   crown_diameter NUMERIC,
   total_height NUMERIC,
-  felling_year DATE,
-  plant_year DATE,
-  location VARCHAR,
+  felling_year INT,
+  plant_year INT,
+  place VARCHAR,
   wkb_geometry GEOMETRY(GEOMETRY, 4326)
 );
 
