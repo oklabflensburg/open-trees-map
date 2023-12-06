@@ -50,6 +50,9 @@ def make_geojson(file_path, object_id, tree_type, tree_species, trunk_diameter, 
             'tree_species': tree_species_string,
         }
 
+        if 'district_id' in o['properties']:
+            properties['district_id'] = o['properties']['district_id']
+
         if trunk_diameter in o['properties']:
             properties['trunk_diameter'] = o['properties'][trunk_diameter]
 
