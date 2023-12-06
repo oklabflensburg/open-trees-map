@@ -1,5 +1,5 @@
 // fetch('/data/baumkataster_bonn.updated.geojson', {
-fetch('/data/baumkataster_flensburg.updated.geojson', {
+fetch('./data/baumkataster_flensburg.updated.geojson', {
   method: 'GET'
 })
 .then((response) => {
@@ -49,8 +49,8 @@ osmGeocoder.on('markgeocode', e => {
 
 
 const customIcon = L.icon({
-    iconUrl: '/static/marker-icon-green.png',
-    shadowUrl: '/static/marker-shadow.png',
+    iconUrl: './static/marker-icon-green.png',
+    shadowUrl: './static/marker-shadow.png',
     iconSize: [31, 41],
     iconAnchor: [12, 41],
     tooltipAnchor: [4, -41],
@@ -59,8 +59,8 @@ const customIcon = L.icon({
 
 
 const blackIcon = L.icon({
-    iconUrl: '/static/marker-icon-black.png',
-    shadowUrl: '/static/marker-shadow.png',
+    iconUrl: './static/marker-icon-black.png',
+    shadowUrl: './static/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     tooltipAnchor: [2, -41],

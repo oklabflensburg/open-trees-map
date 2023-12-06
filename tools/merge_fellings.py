@@ -23,8 +23,8 @@ def read_csv(src):
             pass
 
         for row in reader:
-            x = float(row[3].replace(',', '.'))
-            y = float(row[4].replace(',', '.'))
+            x = float(row[0].replace(',', '.'))
+            y = float(row[1].replace(',', '.'))
             c = [x, y]
 
             rows.append(c)
@@ -56,13 +56,16 @@ def main(src_fellings, src_inventory):
     for feature in inventory['features']:
         hochwert = feature['properties']['hochwert']
         rechtswert = feature['properties']['rechtswert']
+        #hochwert = str(round(feature['properties']['hochwert'], 4))
+        #rechtswert = str(round(feature['properties']['rechtswert'], 4))
 
         for idx, row in reversed(list(enumerate(fellings))):
-            if hochwert == row[0] and rechtswert == row[1]:
+            if abs(hochwert - row[0]) < 0.1 and abs(rechtswert - row[1]) < 0.1 :
                 iso_date = datetime.now().replace(microsecond=0).isoformat()
                 feature['properties']['felling_date'] = iso_date
                 detected.append(feature)
                 fellings.pop(idx)
+                print(idx)
 
     write_json(src_inventory, inventory)
 
