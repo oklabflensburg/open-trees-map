@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
-    <title>Baumkataster Flensburg</title>
+    <title>Baumkataster Stadtplan Flensburg</title>
     <meta content="Das Baumkataster in Flensburg markiert die Straßenbäume und ist eine wichtige Grundlage für den Schutz und die Pflege der Bäume. Erfahren Sie mehr über das Kataster und die Bedeutung der Straßenbäume in Flensburg" name="description">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
     <link crossorigin="" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" rel="stylesheet">
@@ -20,6 +20,33 @@
         <div class="md:flex">
             <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-96 overflow-hidden" id="map"></div>
             <div class="w-full sm:w-4/12 md:w-5/12 lg:w-3/12 sm:overflow-scroll bg-gray-100" id="filter">
+                <div class="px-3 mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold">Baumkataster</h1>
+                    <h2 class="text-xl md:text-2xl">Stadtplan Flensburg</h2>
+                </div>
+                <form id="form" enctype="application/x-www-form-urlencoded">
+                    <div class="mx-3 mb-8">
+                        <label class="block text-gray-700 font-bold mb-2" for="district">
+                            Stadtteil
+                        </label>
+                        <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-pointer" id="district" name="district">
+                            <option value="0">Alle Stadtteile</option>
+                            <option value="1">Altstadt</option>
+                            <option value="2">Neustadt</option>
+                            <option value="3">Nordstadt</option>
+                            <option value="4">Westliche Höhe</option>
+                            <option value="5">Friesischer Berg</option>
+                            <option value="6">Weiche</option>
+                            <option value="7">Südstadt</option>
+                            <option value="8">Sandberg</option>
+                            <option value="9">Jürgensby</option>
+                            <option value="10">Fruerlund</option>
+                            <option value="11">Mürwik</option>
+                            <option value="12">Engelsby</option>
+                            <option value="13">Tarup</option>
+                        </select>
+                    </div>
+                </form>
                 <div class="bg-gray-300">
                     <div class="hidden py-2 px-3" id="details">
                         <div class="text-xl text-red-500 font-bold mb-2" id="fellingYear"></div>
@@ -54,10 +81,8 @@
                     </div>
                 </div>
                 <div class="py-2 px-3">
-                    <h1 class="text-2xl md:text-3xl font-bold">Baumkataster</h1>
-                    <h2 class="text-xl md:text-2xl mb-4 md:mb-8">Stadt Flensburg</h2>
-                    <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Datenquelle</h3>
-                    <p class="font-mono mb-4 md:mb-8">Das Straßenbaumkataster der Stadt Flensburg wird von dem Technischen Betriebszentrum (TBZ Flensburg) im SHP Format über das OpenData Portal Schleswig-Holstein zum <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11" target="_blank">Download</a> angeboten.</p>
+                    <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Hintergrund</h3>
+                    <p class="font-mono mb-4 md:mb-8">Das Straßenbaumkataster der Stadt Flensburg wird von dem Technischen Betriebszentrum AöR (TBZ Flensburg) im Esri Shape Format über das Open Data Portal des Landes Schleswig-Holstein zum kostenlosen <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11" target="_blank">Download</a> angeboten.</p>
                     <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Haftungsausschluss</h3>
                     <p class="font-mono mb-4 md:mb-8">Das OK Lab Flensburg hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service auf dieser Webseite und stellt diese auf der Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.</p>
                     <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Interaktive Karte</h3>
