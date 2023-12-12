@@ -27,7 +27,7 @@ fetch('./data/flensburg_stadtteile.geojson', {
     console.log(error)
 })
 
-const map = L.map('map').setView([54.7836, 9.4321], 13)
+const map = L.map('map').setView([54.7879075, 9.4334885], 13)
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -200,8 +200,10 @@ function renderPromise(data, districtId) {
         disableClusteringAtZoom: 19,
         maxClusterRadius: 40
     })
+
     cluster.addLayer(geojsonGroup)
     map.addLayer(cluster)
 
     map.fitBounds(cluster.getBounds(), {padding: [0, 0, 0, 0]})
+    // console.log(cluster.getBounds().getCenter())
 }

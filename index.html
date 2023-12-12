@@ -20,7 +20,7 @@
         <div class="md:flex">
             <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-96 overflow-hidden" id="map"></div>
             <div class="w-full sm:w-4/12 md:w-5/12 lg:w-3/12 sm:overflow-scroll bg-gray-100" id="filter">
-                <div class="px-3 mb-4">
+                <div class="px-3 pt-2 mb-4">
                     <h1 class="text-2xl md:text-3xl font-bold">Baumkataster</h1>
                     <h2 class="text-xl md:text-2xl">Stadtplan Flensburg</h2>
                 </div>
@@ -47,55 +47,27 @@
                         </select>
                     </div>
                 </form>
-                <div class="bg-gray-300">
-                    <div class="hidden py-2 px-3" id="details">
-                        <div class="text-xl text-red-500 font-bold mb-2" id="fellingYear"></div>
-                        <div class="font-bold">
-                            Gebiet
-                        </div>
-                        <div class="mb-2" id="place">---</div>
-                        <div class="font-bold">
-                            Wissenschaftlicher Name
-                        </div>
-                        <div class="mb-2" id="treeSpecies">---</div>
-                        <div class="font-bold">
-                            Baummodel
-                        </div>
-                        <div class="mb-2" id="treeType">---</div>
-                        <div class="font-bold">
-                            Pflanzjahr
-                        </div>
-                        <div class="mb-2" id="plantYear">---</div>
-                        <div class="font-bold">
-                            Stammumfang
-                        </div>
-                        <div class="mb-2" id="trunkDiameter">---</div>
-                        <div class="font-bold">
-                            Kronendurchmesser
-                        </div>
-                        <div class="mb-2" id="crownDiameter">---</div>
-                        <div class="font-bold">
-                            Baumhöhe
-                        </div>
-                        <div class="mb-2" id="totalHeight">---</div>
-                        <div class="font-bold">
-                            Wikipedia
-                        </div>
-                        <div id="wikipediaUrl">---</div>
-                        <div>
-                            <small>Alle Angaben sind ohne Gewähr</small>
-                        </div>
-                    </div>
+                <div class="hidden px-3" id="details">
+                    <ul class="p-3 bg-gray-700 text-gray-100 mb-3 md:mb-6 font-sans">
+                        <li class="mb-2"><span class="text-lg text-yellow-100 font-bold" id="fellingYear"></span></li>
+                        <li class="mb-2"><strong class="font-bold">Gebiet</strong><br><span id="place">---</span></li>
+                        <li class="mb-2"><strong class="font-bold">Wissenschaftlicher Name</strong><br><span id="treeSpecies">---</span></li>
+                        <li class="mb-2"><strong class="font-bold">Baummodel</strong><br><span id="treeType">---</span></li>
+                        <li class="mb-2"><strong class="font-bold">Pflanzjahr</strong><br><span id="plantYear">---</span></li>
+                        <li class="mb-2"><strong class="font-bold">Stammumfang</strong><br><span id="trunkDiameter">---</span></li>
+                        <li class="mb-2"><strong class="font-bold">Kronendurchmesser</strong><br><span id="crownDiameter">---</span></li>
+                        <li class="mb-2"><strong class="font-bold">Baumhöhe</strong><br><span id="totalHeight">---</span></li>
+                        <li class="mb-2"><strong class="font-bold">Wikipedia</strong><br><span id="wikipediaUrl">---</span></li>
+                        <li><small>Alle Angaben sind ohne Gewähr</small></li>
+                    </ul>
                 </div>
                 <div class="py-2 px-3">
                     <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Hintergrund</h3>
                     <p class="font-mono mb-4 md:mb-8">Das Straßenbaumkataster der Stadt Flensburg wird von dem Technischen Betriebszentrum AöR (TBZ Flensburg) im Esri Shape Format über das Open Data Portal des Landes Schleswig-Holstein zum kostenlosen <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11" target="_blank">Download</a> angeboten.</p>
                     <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Haftungsausschluss</h3>
-                    <p class="font-mono mb-4 md:mb-8">Das OK Lab Flensburg hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service auf dieser Webseite und stellt diese auf der Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.</p>
-                    <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Interaktive Karte</h3>
-                    <p class="font-mono mb-4 md:mb-8">Beispielanwendung einer Baumkartasterkarte mit Daten der Stadt Flensburg.</p>
+                    <p class="font-mono mb-4 md:mb-8">Das <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://oklabflensburg.de" target="_blank">OK Lab Flensburg</a> hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service auf dieser Webseite und stellt diese auf der Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.</p>
                     <h3 class="text-xl md:text-2xl mb-1 md:mb-3">Quellcode</h3>
-                    <p class="font-mono"><a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://github.com/oklabflensburg/open-trees-map" target="_blank">GitHub</a></p>
+                    <p class="font-mono">Der aktuelle Entwicklungsstand kann auf <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://github.com/oklabflensburg/open-trees-map" target="_blank">GitHub</a> eingesehen werden und von jeder Kommune, Stadt oder Land kostenfrei und lizenzfrei genutzt und redeployed werden.</p>
                 </div>
             </div>
         </div>
