@@ -18,15 +18,17 @@ from geojson import FeatureCollection, Feature, Point
 @click.argument('crown_diameter')
 @click.argument('total_height')
 @click.argument('plant_year')
+@click.argument('rechtswert')
+@click.argument('hochwert')
 @click.argument('place')
-def read_dataset(file_path, object_id, tree_type, tree_species, trunk_diameter, crown_diameter, total_height, plant_year, place):
+def read_dataset(file_path, object_id, tree_type, tree_species, trunk_diameter, crown_diameter, total_height, plant_year, hochwert, rechtswert, place):
     with open(Path(file_path), 'r') as f:
         json_data = json.loads(f.read())
 
-    make_geojson(file_path, object_id, tree_type, tree_species, trunk_diameter, crown_diameter, total_height, plant_year, place, json_data)
+    make_geojson(file_path, object_id, tree_type, tree_species, trunk_diameter, crown_diameter, total_height, plant_year, hochwert, rechtswert, place, json_data)
 
 
-def make_geojson(file_path, object_id, tree_type, tree_species, trunk_diameter, crown_diameter, total_height, plant_year, place, json_data):
+def make_geojson(file_path, object_id, tree_type, tree_species, trunk_diameter, crown_diameter, total_height, plant_year, hochwert, rechtswert, place, json_data):
     file_name = Path(file_path).stem
     parent_path = Path(file_path).parent
     dst = f'{parent_path}/{file_name}.updated.geojson'
@@ -70,6 +72,12 @@ def make_geojson(file_path, object_id, tree_type, tree_species, trunk_diameter, 
 
         if tree_type in o['properties']:
             properties['tree_type'] = o['properties'][tree_type]
+
+        if hochwert in o['properties']:
+            properties['hochwert'] = o['properties'][hochwert]
+
+        if rechtswert in o['properties']:
+            properties['rechtswert'] = o['properties'][rechtswert]
 
         if 'felling_date' in o['properties']:
             isodate = datetime.fromisoformat(o['properties']['felling_date'])

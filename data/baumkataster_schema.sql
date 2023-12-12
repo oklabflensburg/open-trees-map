@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS tree_inventory (
   species_id INT REFERENCES tree_inventory (id),
   district_id INT REFERENCES districts (id),
   object_id INT,
+  hochwert NUMERIC,
+  rechtswert NUMERIC,
   tree_type VARCHAR,
   tree_species VARCHAR,
   trunk_diameter NUMERIC,
@@ -32,7 +34,8 @@ DROP TABLE IF EXISTS tree_species CASCADE;
 CREATE TABLE IF NOT EXISTS tree_species (
   id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   species_latin VARCHAR NOT NULL,
-  species_german VARCHAR NOT NULL
+  species_german VARCHAR NOT NULL,
+  wikipedia_url VARCHAR
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS tree_species_species_latin_idx ON tree_species (species_latin);

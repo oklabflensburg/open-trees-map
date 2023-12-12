@@ -43,9 +43,9 @@ def write_json(dst, data):
 
 
 @click.command()
-@click.argument('src_inventory')
-def main(src_inventory):
-    inventory = read_json(src_inventory)
+@click.argument('src')
+def main(src):
+    inventory = read_json(src)
     cur = conn.cursor()
 
     detected = []
@@ -55,9 +55,10 @@ def main(src_inventory):
     rows = cur.fetchall()
 
     for row in rows:
-        inventory['features'][row[0] - 1]['properties']['district_id'] = row[1]
+        if row[1]:
+            inventory['features'][row[0] - 1]['properties']['district_id'] = row[1]
 
-    write_json(src_inventory, inventory)
+    write_json(src, inventory)
 
 
 if __name__ == '__main__':

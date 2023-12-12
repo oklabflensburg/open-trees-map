@@ -97,7 +97,7 @@ cd tools
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python convert_geojson.py ../data/baumkataster_flensburg.geojson OBJECT_ID TREE_TYPE type TRUNK_DIAMETER CROWN_DIAMETER TOTAL_HEIGHT PLANT_YEAR place
+python convert_geojson.py ../data/baumkataster_flensburg.geojson OBJECT_ID TREE_TYPE type TRUNK_DIAMETER CROWN_DIAMETER TOTAL_HEIGHT PLANT_YEAR hochwert rechtswert place
 deactivate
 ```
 
@@ -112,9 +112,10 @@ virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python insert_species.py ../data/tree_species.csv
-python insert_inventory.py ../data/baumkataster_flensburg.updated.geojson
+python insert_inventory.py ../data/baumkataster_flensburg.geojson
 python update_districts.py
 python update_species.py
+python merge_districts.py ../data/baumkataster_flensburg.geojson
 deactivate
 ```
 

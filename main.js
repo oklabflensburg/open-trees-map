@@ -136,6 +136,7 @@ function renderPromise(data, districtId) {
                 map.setView(e.latlng, 19)
 
                 document.querySelector('#details').classList.remove('hidden')
+                document.querySelector('#fellingYear').innerHTML = ''
 
                 if ('tree_type' in e.target.feature.properties) {
                     document.querySelector('#treeType').innerHTML = e.target.feature.properties.tree_type
@@ -168,6 +169,10 @@ function renderPromise(data, districtId) {
 
                 if ('place' in e.target.feature.properties) {
                     document.querySelector('#place').innerHTML = e.target.feature.properties.place
+                }
+
+                if ('wikipedia_url' in e.target.feature.properties) {
+                    document.querySelector('#wikipediaUrl').innerHTML = e.target.feature.properties.wikipedia_url
                 }
             })
         },

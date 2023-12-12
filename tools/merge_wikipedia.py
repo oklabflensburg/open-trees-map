@@ -50,12 +50,19 @@ def main(src):
 
     detected = []
 
-    cur.execute('SELECT id, felling_year FROM tree_inventory WHERE felling_year IS NOT NULL')
+    cur.execute('''
+        SELECT ti.id, ts.wikipedia_url
+        FROM tree_inventory AS ti
+        LEFT JOIN tree_species AS ts
+        ON ts.id = ti.species_id
+    ''')
 
     rows = cur.fetchall()
 
     for row in rows:
-        inventory['features'][row[0] - 1]['properties']['felling_year'] = row[1]
+        print(row)
+        if row[1]:
+            inventory['features'][row[0] - 1]['properties']['wikipedia_url'] = row[1]
 
     write_json(src, inventory)
 

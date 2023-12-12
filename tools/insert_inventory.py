@@ -48,27 +48,31 @@ def check_property(properties, key):
 
 def insert_object(cur, properties, geometry):
     object_id = check_property(properties, 'object_id')
-    tree_type = check_property(properties, 'tree_type')
+    hochwert = check_property(properties, 'hochwert')
+    rechtswert = check_property(properties, 'rechtswert')
     tree_species = check_property(properties, 'tree_species')
     trunk_diameter = check_property(properties, 'trunk_diameter')
     crown_diameter = check_property(properties, 'crown_diameter')
     total_height = check_property(properties, 'total_height')
     felling_year = check_property(properties, 'felling_year')
     plant_year = check_property(properties, 'plant_year')
+    tree_type = check_property(properties, 'tree_type')
     place = check_property(properties, 'place')
 
     g = Point(shape(geometry))
     wkb_geometry = wkb.dumps(g, hex=True, srid=4326)
 
     sql = '''
-        INSERT INTO tree_inventory (object_id, tree_type, tree_species, trunk_diameter,
-        crown_diameter, total_height, felling_year, plant_year, place, wkb_geometry)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO tree_inventory (object_id, hochwert, rechtswert,
+        tree_type, tree_species, trunk_diameter, crown_diameter,
+        total_height, felling_year, plant_year, place, wkb_geometry) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     '''
 
     try:
-        cur.execute(sql, (object_id, tree_type, tree_species, trunk_diameter,
-            crown_diameter, total_height, felling_year, plant_year, place, wkb_geometry))
+        cur.execute(sql, (object_id, hochwert, rechtswert, tree_type,
+            tree_species, trunk_diameter, crown_diameter, total_height,
+            felling_year, plant_year, place, wkb_geometry))
     except UniqueViolation as e:
         print(e)
         return
