@@ -179,6 +179,10 @@ function renderPromise(data, districtId) {
                     document.querySelector('#place').innerHTML = e.target.feature.properties.place
                 }
 
+                if ('topology' in e.target.feature.properties) {
+                    document.querySelector('#topology').innerHTML = `${e.target.feature.properties.topology}m`
+                }
+
                 if ('wikipedia_url' in e.target.feature.properties) {
                     document.querySelector('#wikipediaUrl').innerHTML = e.target.feature.properties.wikipedia_url
                 }

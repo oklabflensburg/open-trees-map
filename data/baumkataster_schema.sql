@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS tree_inventory (
   object_id INT,
   hochwert NUMERIC,
   rechtswert NUMERIC,
+  topology NUMERIC,
   tree_type VARCHAR,
   tree_species VARCHAR,
   trunk_diameter NUMERIC,
