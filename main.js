@@ -109,6 +109,14 @@ function addDistrictsLayer(data) {
 }
 
 
+function formatAmountOfTrees(amountOfTrees) {
+    const numberFormat = new Intl.NumberFormat('de-DE');
+    const amountOfTreesFormatted = numberFormat.format(amountOfTrees)
+
+    return amountOfTreesFormatted
+}
+
+
 function renderPromise(data, districtId) {
     dataObject = data
 
@@ -202,6 +210,10 @@ function renderPromise(data, districtId) {
     })
 
     cluster.addLayer(geojsonGroup)
+    const lengthTrees = geojsonGroup.getLayers().length
+    const amountOfTrees = formatAmountOfTrees(lengthTrees)
+    document.querySelector('#amountTrees').innerHTML = `Anzahl angezeigter Straßenbäume ${amountOfTrees}`
+  
     map.addLayer(cluster)
 
     map.fitBounds(cluster.getBounds(), {padding: [0, 0, 0, 0]})
