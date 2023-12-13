@@ -8,7 +8,7 @@ fetch('./data/baumkataster_flensburg.updated.geojson', {
   return response.json()
 })
 .then((data) => {
-  renderPromise(data, 0)
+  renderPromise(data, 0, false)
 })
 .catch(function (error) {
   console.log(error)
@@ -88,10 +88,13 @@ if (queryform.length) {
     queryform.addEventListener('change', (e) => {
         e.preventDefault()
 
+        let onlyFellings = false
+
         const data = new FormData(queryform)
         const districtId = parseInt(data.get('district'))
+        onlyFellings = /^true$/i.test(data.get('onlyFellings'))
 
-        renderPromise(dataObject, districtId)
+        renderPromise(dataObject, districtId, onlyFellings)
     })
 }
 
@@ -117,8 +120,9 @@ function formatAmountOfTrees(amountOfTrees) {
 }
 
 
-function renderPromise(data, districtId) {
+function renderPromise(data, districtId, onlyFellings) {
     dataObject = data
+    console.log(onlyFellings)
 
     if (cluster) {
         map.removeLayer(cluster)
@@ -126,13 +130,18 @@ function renderPromise(data, districtId) {
 
     const geojsonGroup = L.geoJSON(data, {
         filter: function (feature) {
-            if (districtId === 0) {
+            if (districtId === 0 && onlyFellings === false) {
+                return true
+            } else if (districtId === 0 && onlyFellings === true && 'felling_year' in feature.properties) {
                 return true
             }
 
-            if (feature.properties.district_id === districtId) {
+            if (feature.properties.district_id === districtId && onlyFellings === false) {
                 return true
-            }   
+            } else if (feature.properties.district_id === districtId && onlyFellings === true && 'felling_year' in feature.properties) {
+                return true
+            }
+  
         },
         onEachFeature: function (feature, layer) {
             layer.on('click', function (e) {
