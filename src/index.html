@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Stadtplan mit Baumkataster für Flensburg</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:title" content="Stadtplan mit Baumkataster für Flensburg">
+    <meta property="og:site_name" content="Baumkataster für Flensburg">
+    <meta property="og:url" content="https://baumkataster-flensburg.de">
+    <meta property="og:description" content="Das Baumkataster in Flensburg markiert die Straßenbäume und ist eine wichtige Grundlage für den Schutz und die Pflege der Bäume. Erfahren Sie mehr über das Kataster und die Bedeutung der Straßenbäume in Flensburg">
+    <meta property="og:type" content="website">
+    <meta content="Das Baumkataster in Flensburg markiert die Straßenbäume und ist eine wichtige Grundlage für den Schutz und die Pflege der Bäume. Erfahren Sie mehr über das Kataster und die Bedeutung der Straßenbäume in Flensburg" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="h-screen overflow-auto bg-slate-50">
+        <div class="md:flex">
+            <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-96 overflow-hidden" id="map"></div>
+            <div class="w-full sm:w-4/12 md:w-5/12 lg:w-3/12 sm:overflow-scroll bg-gray-100" id="filter">
+                <div class="py-2 px-3 mb-4 lg:mb-8">
+                    <h1 class="tracking-normal leading-normal font-bold text-2xl md:text-3xl lg:text-4xl mb-1">Baumkataster</h1>
+                    <h2><a href="/" class="text-xl md:text-2xl text-gray-700 hover:text-blue-700 focus:text-blue-800" title="Stadtplan Flensburg">Stadtplan Flensburg</a></h2>
+                </div>
+                <div class="bg-white border border-slate-300 leading-normal lg:mb-6 lg:text-lg mb-3 mx-3 p-3 rounded text-black text-md" id="details">
+                    <ul id="detailList"></ul>
+                </div>
+                <form id="form" enctype="application/x-www-form-urlencoded">
+                    <div class="p-3">
+                        <label class="font-bold text-lg lg:text-xl block mb-2" for="district">
+                            Stadtteil auswählen
+                        </label>
+                        <select class="w-full appearance-none bg-white border text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-pointer py-2 px-3 mb-3" id="district" name="district">
+                            <option value="0">Alle Stadtteile</option>
+                            <option value="1">Altstadt</option>
+                            <option value="2">Neustadt</option>
+                            <option value="3">Nordstadt</option>
+                            <option value="4">Westliche Höhe</option>
+                            <option value="5">Friesischer Berg</option>
+                            <option value="6">Weiche</option> 
+                            <option value="7">Südstadt</option>
+                            <option value="8">Sandberg</option>
+                            <option value="9">Jürgensby</option>
+                            <option value="10">Fruerlund</option>
+                            <option value="11">Mürwik</option>
+                            <option value="12">Engelsby</option>
+                            <option value="13">Tarup</option>
+                        </select>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" name="onlyFellings" value="true" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Nur gefällte Bäume anzeigen</span>
+                        </label>
+                    </div>
+                </form>
+                <div class="mt-3 md:mt-6 py-2 px-3" id="about">
+                    <h3 class="font-bold text-xl md:text-2xl mb-1">Hintergrund</h3>
+                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 md:mb-6">Das Straßenbaumkataster der Stadt Flensburg wird von dem Technischen Betriebszentrum AöR (TBZ Flensburg) im Esri Shape Format über das Open Data Portal des Landes Schleswig-Holstein zum kostenlosen <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11" target="_blank">Download</a> angeboten.</p>
+                    <h3 class="font-bold text-xl md:text-2xl mb-1">Haftungsausschluss</h3>
+                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 md:mb-6">Das <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://oklabflensburg.de" target="_blank">OK Lab Flensburg</a> hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service auf dieser Webseite und stellt diese auf der Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.</p>
+                   <h3 class="font-bold text-xl md:text-2xl mb-1">Quellcode</h3>
+                   <p class="font-normal leading-normal text-md lg:text-lg">Der aktuelle Entwicklungsstand kann auf <a class="text-blue-600 hover:text-blue-400 focus:text-blue-400" href="https://github.com/oklabflensburg/open-kita-map" target="_blank">GitHub</a> eingesehen werden und von jeder Kommune, Stadt oder Land kostenfrei und lizenzfrei genutzt und redeployed werden.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-gray-200 h-[4vh] border-t md:border-t border-gray-300 text-sm flex justify-center items-center">
+            <a class="inline-block text-gray-700 hover:text-blue-800 focus:text-blue-800" href="./impressum.html">Impressum</a> <span class="inline-block text-gray-700 px-3">|</span> <a class="inline-block text-gray-700 hover:text-blue-800 focus:text-blue-800" href="./impressum.html#privacy">Datenschutzerklärung</a> <span class="inline-block text-gray-700 px-3">|</span> <a class="inline-block text-gray-700 hover:text-blue-800 focus:text-blue-800" href="./lizenz.html">Lizenz</a>
+        </footer>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

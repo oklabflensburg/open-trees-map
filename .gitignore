@@ -1,3 +1,15 @@
-__pycache__
-/venv
+.parcel-cache/
+node_modules/
+coverage/
+venv/
+dist/
+.DS_Store
 .env
+.idea
+*.tgz
+*.suo
+*.local
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
