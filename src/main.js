@@ -13,9 +13,12 @@ import markerGefaelltDefault from 'url:../static/marker-gefaellt-default.webp'
 import markerGefaelltSelected from 'url:../static/marker-gefaellt-selected.webp'
 import markerSelected from 'url:../static/marker-laubbaum-selected.webp'
 
+import { Env } from './env.js'
 
-let dataObject = null
-let cluster = null
+
+const env = new Env()
+env.injectLinkContent('.contact-mail', 'mailto:', '', env.contactMail, 'E-Mail')
+
 
 fetch(inventory, {
   method: 'GET'
@@ -75,7 +78,8 @@ const layerStyle = {
   }
 }
 
-const map = L.map('map').setView([54.7836, 9.4321], 13)
+
+const map = L.map('map').setView([54.79443515, 9.43205485], 13)
 
 L.tileLayer.wms('https://sgx.geodatenzentrum.de/wms_basemapde?SERVICE=WMS&Request=GetCapabilities', {
   layers: 'de_basemapde_web_raster_grau',
@@ -83,8 +87,12 @@ L.tileLayer.wms('https://sgx.geodatenzentrum.de/wms_basemapde?SERVICE=WMS&Reques
   attribution: '<a href="https://www.bkg.bund.de">© GeoBasis-DE / BKG 2024</a> | <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>'
 }).addTo(map)
 
+
 let geocoder = L.Control.Geocoder.nominatim()
 let previousSelectedMarker = null
+let dataObject = null
+let cluster = null
+
 
 if (typeof URLSearchParams !== 'undefined' && location.search) {
   // parse /?geocoder=nominatim from URL
