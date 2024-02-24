@@ -35,6 +35,19 @@ git clone https://github.com/oklabflensburg/open-trees-map.git
 Create dot `.env` file inside root directory. Make sure to add the following content repaced by your actual values
 
 ```
+BASE_URL=http://localhost
+
+CONTACT_MAIL=mail@example.com
+CONTACT_PHONE="+49xx"
+
+PRIVACY_CONTACT_PERSON="Firstname Lastname"
+
+ADDRESS_NAME="Address Name"
+ADDRESS_STREET="Address Street"
+ADDRESS_HOUSE_NUMBER="House Number"
+ADDRESS_POSTAL_CODE="Postal Code"
+ADDRESS_CITY="City"
+
 DB_PASS=postgres
 DB_HOST=localhost
 DB_USER=postgres
