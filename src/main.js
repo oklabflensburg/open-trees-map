@@ -87,37 +87,26 @@ L.tileLayer('https://tiles.oklabflensburg.de/sgm/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="dc:rights">OpenStreetMap</a> contributors'
 }).addTo(map)
 
-let geocoder = L.Control.Geocoder.nominatim()
-let previousSelectedMarker = null
-let dataObject = null
-let cluster = null
+const geocoder = L.Control.Geocoder.nominatim({
+  serviceUrl: 'https://nominatim.oklabflensburg.de/'
+})
 
-
-if (typeof URLSearchParams !== 'undefined' && location.search) {
-  // parse /?geocoder=nominatim from URL
-  const params = new URLSearchParams(location.search)
-  const geocoderString = params.get('geocoder')
-
-  if (geocoderString && L.Control.Geocoder[geocoderString]) {
-    console.log('Using geocoder', geocoderString)
-    geocoder = L.Control.Geocoder[geocoderString]()
-  }
-  else if (geocoderString) {
-    console.warn('Unsupported geocoder', geocoderString)
-  }
-}
-
-const osmGeocoder = new L.Control.geocoder({
-  query: 'Flensburg',
+const control = L.Control.geocoder({
+  geocoder,
   position: 'topright',
   placeholder: 'Adresse oder Ort',
   defaultMarkGeocode: false
 }).addTo(map)
 
-osmGeocoder.on('markgeocode', (e) => {
+control.on('markgeocode', (e) => {
   const bounds = L.latLngBounds(e.geocode.bbox._southWest, e.geocode.bbox._northEast)
   map.fitBounds(bounds)
 })
+
+let previousSelectedMarker = null
+let dataObject = null
+let cluster = null
+
 
 function addDistrictsLayer(data) {
   L.geoJson(data, {
