@@ -81,12 +81,11 @@ const layerStyle = {
 
 const map = L.map('map').setView([54.79443515, 9.43205485], 13)
 
-L.tileLayer.wms('https://sgx.geodatenzentrum.de/wms_basemapde?SERVICE=WMS&Request=GetCapabilities', {
-  layers: 'de_basemapde_web_raster_grau',
+L.tileLayer('https://tiles.oklabflensburg.de/sgm/{z}/{x}/{y}.png', {
   maxZoom: 20,
-  attribution: '<a href="https://www.bkg.bund.de">© GeoBasis-DE / BKG 2024</a> | <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>'
+  maxNativeZoom: 20,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="dc:rights">OpenStreetMap</a> contributors'
 }).addTo(map)
-
 
 let geocoder = L.Control.Geocoder.nominatim()
 let previousSelectedMarker = null
