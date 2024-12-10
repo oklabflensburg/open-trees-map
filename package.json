@@ -16,26 +16,22 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
-    "parcel": "^2.11.0"
+    "parcel": "^2.13.2"
   },
   "devDependencies": {
-    "@parcel/config-default": "^2.11.0",
-    "@parcel/transformer-raw": "^2.11.0",
-    "eslint": "^8.56.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.16.0",
+    "@parcel/config-default": "^2.13.2",
+    "@parcel/transformer-raw": "^2.13.2",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
     "htmlhint": "^1.1.4",
     "leaflet-control-geocoder": "^2.4.0",
     "leaflet.markercluster": "^1.5.3",
     "parcel-reporter-static-files-copy": "^1.5.3",
-    "postcss": "^8.4.33",
-    "stylelint": "^16.2.1",
-    "stylelint-config-standard": "^36.0.0",
-    "tailwindcss": "^3.4.1"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "svgo": "2.8.0"
-      }
-    }
+    "postcss": "^8.4.49",
+    "stylelint": "^16.11.0",
+    "stylelint-config-standard": "^36.0.1",
+    "tailwindcss": "^3.4.16"
   }
 }
