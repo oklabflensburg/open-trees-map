@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS tree_inventory CASCADE;
 CREATE TABLE IF NOT EXISTS tree_inventory (
   id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   species_id INT REFERENCES tree_inventory (id),
-  district_id INT REFERENCES districts (id),
   object_id INT,
   hochwert NUMERIC,
   rechtswert NUMERIC,

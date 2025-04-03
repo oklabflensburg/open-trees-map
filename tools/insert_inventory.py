@@ -70,9 +70,11 @@ def insert_object(cur, properties, geometry):
     '''
 
     try:
-        cur.execute(sql, (object_id, hochwert, rechtswert, tree_type,
+        cur.execute(sql, (
+            object_id, hochwert, rechtswert, tree_type,
             tree_species, trunk_diameter, crown_diameter, total_height,
-            felling_year, plant_year, place, wkb_geometry))
+            felling_year, plant_year, place, wkb_geometry
+        ))
     except UniqueViolation as e:
         print(e)
         return
