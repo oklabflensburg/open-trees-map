@@ -15,57 +15,81 @@
     <link href="main.css" rel="stylesheet">
 </head>
 <body>
-    <div class="h-screen overflow-auto bg-slate-50">
-        <div class="md:flex">
-            <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-96 overflow-hidden" id="map"></div>
-            <div class="w-full sm:w-4/12 md:w-5/12 lg:w-3/12 sm:overflow-scroll bg-gray-100" id="filter">
-                <div class="py-2 px-3 mb-4 lg:mb-8">
-                    <h1 class="tracking-normal leading-normal font-bold text-2xl md:text-3xl lg:text-4xl mb-1">Baumkataster</h1>
-                    <h2><a href="/" class="text-xl md:text-2xl text-gray-700 hover:text-blue-700 focus:text-blue-800" title="Stadtplan Flensburg">Stadtplan Flensburg</a></h2>
-                </div>
-                <div class="bg-white border border-slate-300 leading-normal lg:mb-6 lg:text-lg mb-3 mx-3 p-3 rounded text-black text-md hidden" id="details">
-                    <ul id="detailList"></ul>
-                </div>
-                <form id="form" enctype="application/x-www-form-urlencoded">
-                    <div class="p-3">
-                        <label class="font-bold text-lg lg:text-xl block mb-2" for="district">
-                            Stadtteil auswählen
-                        </label>
-                        <select class="w-full appearance-none bg-white border text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-pointer py-2 px-3 mb-3" id="district" name="district">
-                            <option value="0">Alle Stadtteile</option>
-                            <option value="1">Altstadt</option>
-                            <option value="2">Neustadt</option>
-                            <option value="3">Nordstadt</option>
-                            <option value="4">Westliche Höhe</option>
-                            <option value="5">Friesischer Berg</option>
-                            <option value="6">Weiche</option> 
-                            <option value="7">Südstadt</option>
-                            <option value="8">Sandberg</option>
-                            <option value="9">Jürgensby</option>
-                            <option value="10">Fruerlund</option>
-                            <option value="11">Mürwik</option>
-                            <option value="12">Engelsby</option>
-                            <option value="13">Tarup</option>
-                        </select>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" name="onlyFellings" value="true" class="sr-only peer">
-                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Nur gefällte Bäume anzeigen</span>
-                        </label>
+    <div class="min-h-screen bg-gradient-to-br from-secondary-50 to-white overflow-auto">
+        <div class="md:flex md:flex-1">
+            <div class="w-full sm:w-8/12 md:w-7/12 lg:w-9/12 h-[calc(100dvh-3rem)] overflow-hidden" id="map"></div>
+            <div class="bottom-sheet-container w-full sm:w-4/12 md:w-5/12 lg:w-3/12 h-[calc(100dvh-3rem)] overflow-y-scroll">
+                <div class="sm:overflow-auto bg-white/95 backdrop-blur-sm border-l border-secondary-200 shadow-soft" id="filter">
+                    <div class="bottom-sheet-content">
+                    <div class="py-4 px-5 mb-6">
+                        <h1 class="text-3xl md:text-4xl font-bold text-secondary-900 tracking-tight mb-1">Baumkataster</h1>
+                        <h2 class="text-xl md:text-2xl font-medium text-secondary-700">
+                            <a href="/" class="hover:text-primary-600 focus:text-primary-700 transition-colors duration-250" title="Stadtplan Flensburg">Stadtplan Flensburg</a>
+                        </h2>
                     </div>
-                </form>
-                <div class="mt-3 md:mt-6 py-2 px-3" id="about">
-                    <h3 class="font-bold text-xl md:text-2xl mb-1">Hintergrund</h3>
-                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 md:mb-6">Das Straßenbaumkataster der Stadt Flensburg wird von dem Technischen Betriebszentrum AöR im Esri Shape Format über das Open Data Portal des Landes Schleswig-Holstein <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11" target="_blank">zum Download</a> angeboten. Falls Sie Anregungen, Kritik oder Ergänzungen haben, schreiben Sie uns bitte eine <a class="contact-mail text-blue-600 hover:text-blue-400 focus:text-blue-400" href="" target="_blank"></a>.</p>
-                    <h3 class="font-bold text-xl md:text-2xl mb-1">Haftungsausschluss</h3>
-                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 md:mb-6">Das <a class="text-blue-600 hover:text-blue-500 focus:text-blue:500" href="https://oklabflensburg.de" target="_blank">OK Lab Flensburg</a> hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service auf dieser Webseite und stellt diese auf der Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.</p>
-                   <h3 class="font-bold text-xl md:text-2xl mb-1">Quellcode</h3>
-                   <p class="font-normal leading-normal text-md lg:text-lg">Der aktuelle Entwicklungsstand kann auf <a class="text-blue-600 hover:text-blue-400 focus:text-blue-400" href="https://github.com/oklabflensburg/open-trees-map" target="_blank">GitHub</a> eingesehen werden und von jeder Kommune, Stadt oder Land kostenfrei und lizenzfrei genutzt und redeployed werden.</p>
+                    <div class="card mx-4 mb-6 hidden" id="details">
+                        <ul id="detailList" class="space-y-3"></ul>
+                    </div>
+                    <form id="form" enctype="application/x-www-form-urlencoded" class="px-5 pb-5">
+                        <div class="space-y-5">
+                            <div>
+                                <label class="form-label" for="district">
+                                    Stadtteil auswählen
+                                </label>
+                                <select class="form-select" id="district" name="district">
+                                    <option value="0">Alle Stadtteile</option>
+                                    <option value="1">Altstadt</option>
+                                    <option value="2">Neustadt</option>
+                                    <option value="3">Nordstadt</option>
+                                    <option value="4">Westliche Höhe</option>
+                                    <option value="5">Friesischer Berg</option>
+                                    <option value="6">Weiche</option> 
+                                    <option value="7">Südstadt</option>
+                                    <option value="8">Sandberg</option>
+                                    <option value="9">Jürgensby</option>
+                                    <option value="10">Fruerlund</option>
+                                    <option value="11">Mürwik</option>
+                                    <option value="12">Engelsby</option>
+                                    <option value="13">Tarup</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" name="onlyFellings" value="true" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-secondary-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-secondary-400 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                    <span class="ms-3 text-sm font-medium text-secondary-900">Nur gefällte Bäume anzeigen</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="mt-6 pt-6 pb-8 px-5 border-t border-secondary-100" id="about">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="section-subtitle">Hintergrund</h3>
+                                <p class="text-base lg:text-lg text-secondary-700 leading-relaxed mb-4">Das Straßenbaumkataster der Stadt Flensburg wird von dem Technischen Betriebszentrum AöR im Esri Shape Format über das Open Data Portal des Landes Schleswig-Holstein <a class="text-primary-600 hover:text-primary-500 focus:text-primary-700 transition-colors duration-250" href="https://opendata.schleswig-holstein.de/dataset/baumkataster-flensburg-2023-05-11" target="_blank" rel="noopener noreferrer">zum Download angeboten</a>. Falls Sie Anregungen, Kritik oder Ergänzungen haben, schreiben Sie uns bitte eine <a class="contact-mail text-primary-600 hover:text-primary-500 focus:text-primary-700 transition-colors duration-250" href="" target="_blank" rel="noopener noreferrer">E-Mail</a>.</p>
+                            </div>
+                            <div>
+                                <h3 class="section-subtitle">Haftungsausschluss</h3>
+                                <p class="text-base lg:text-lg text-secondary-700 leading-relaxed mb-4">Das <a class="text-primary-600 hover:text-primary-500 focus:text-primary-700 transition-colors duration-250" href="https://oklabflensburg.de" target="_blank" rel="noopener noreferrer">OK Lab Flensburg</a> hostet die zum Download bereitgestellten Daten des TBZ Flensburg ohne inhaltliche Änderung als Feature Service auf dieser Webseite und stellt diese auf der Karte für Analysen zur Verfügung. Alle Daten werden ungeprüft und ohne Gewähr auf deren Genauigkeit zur Verfügung gestellt. Das OK Lab Flensburg übernimmt hierfür keinerlei Haftung und Gewähr.</p>
+                            </div>
+                            <div>
+                                <h3 class="section-subtitle">Quellcode</h3>
+                                <p class="text-base lg:text-lg text-secondary-700 leading-relaxed">Der aktuelle Entwicklungsstand kann auf <a class="text-primary-600 hover:text-primary-500 focus:text-primary-700 transition-colors duration-250" href="https://github.com/oklabflensburg/open-trees-map" target="_blank" rel="noopener noreferrer">GitHub</a> eingesehen werden und von jeder Kommune, Stadt oder Land kostenfrei und lizenzfrei genutzt und redeployed werden.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            </div>
         </div>
-        <footer class="bg-gray-200 h-[4vh] border-t md:border-t border-gray-300 text-sm flex justify-center items-center">
-            <a class="inline-block text-gray-700 hover:text-blue-800 focus:text-blue-800" href="./impressum.html">Impressum</a> <span class="inline-block text-gray-700 px-3">|</span> <a class="inline-block text-gray-700 hover:text-blue-800 focus:text-blue-800" href="./impressum.html#privacy">Datenschutzerklärung</a> <span class="inline-block text-gray-700 px-3">|</span> <a class="inline-block text-gray-700 hover:text-blue-800 focus:text-blue-800" href="./lizenz.html">Lizenz</a>
+        <footer class="h-12 bg-secondary-100 border-t border-secondary-200 py-3 px-4 text-sm flex justify-center items-center">
+            <nav class="flex items-center space-x-4" aria-label="Footer navigation">
+                <a class="inline-block text-secondary-700 hover:text-primary-600 focus:text-primary-700 transition-colors duration-250" href="./impressum.html">Impressum</a>
+                <span class="inline-block text-secondary-400">|</span>
+                <a class="inline-block text-secondary-700 hover:text-primary-600 focus:text-primary-700 transition-colors duration-250" href="./impressum.html#privacy">Datenschutzerklärung</a>
+                <span class="inline-block text-secondary-400">|</span>
+                <a class="inline-block text-secondary-700 hover:text-primary-600 focus:text-primary-700 transition-colors duration-250" href="./lizenz.html">Lizenz</a>
+            </nav>
         </footer>
     </div>
 

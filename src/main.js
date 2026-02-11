@@ -14,10 +14,30 @@ import markerGefaelltSelected from 'url:../static/marker-gefaellt-selected.webp'
 import markerSelected from 'url:../static/marker-laubbaum-selected.webp'
 
 import { Env } from './env.js'
+import { BottomSheet } from './bottom_sheet.js'
 
 
 const env = new Env()
 env.injectLinkContent('.contact-mail', 'mailto:', '', env.contactMail, 'E-Mail')
+
+// Initialize bottom sheet for mobile
+let bottomSheet = null
+const filterElement = document.querySelector('#filter')
+if (filterElement) {
+  bottomSheet = new BottomSheet(filterElement, {
+    closedHeight: 60,
+    openHeight: window.innerHeight * 0.8,
+    snapThreshold: 0.3,
+    animationDuration: 300
+  })
+  
+  // Update heights on window resize
+  window.addEventListener('resize', () => {
+    if (bottomSheet) {
+      bottomSheet.updateHeights()
+    }
+  })
+}
 
 
 fetch(inventory, {
@@ -81,7 +101,7 @@ const layerStyle = {
 
 const map = L.map('map').setView([54.79443515, 9.43205485], 13)
 
-L.tileLayer('https://tiles.oklabflensburg.de/sgm/{z}/{x}/{y}.png', {
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 20,
   maxNativeZoom: 20,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="dc:rights">OpenStreetMap</a> contributors'

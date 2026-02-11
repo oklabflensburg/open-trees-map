@@ -8,51 +8,68 @@
   <link href="./main.css" rel="stylesheet">
 </head>
 <body>
-  <div class="h-screen overflow-auto bg-white">
-      <header class="bg-gray-700 flex justify-center items-center h-[6vh] md:h-[4vh] mb-4">
-          <ul class="sm:container sm:mx-auto">
-              <li>
-                  <a class="inline-block text-white" href="./">Home</a>
-              </li>
-          </ul>
+  <div class="min-h-screen bg-gradient-to-br from-secondary-50 to-white overflow-auto">
+      <header class="bg-secondary-800 flex justify-center items-center py-3 md:py-4 shadow-sm">
+          <div class="container mx-auto px-4">
+              <nav aria-label="Main navigation">
+                  <ul class="flex justify-center">
+                      <li>
+                          <a class="inline-block text-white hover:text-primary-300 focus:text-primary-300 transition-colors duration-250 font-medium" href="./">Home</a>
+                      </li>
+                  </ul>
+              </nav>
+          </div>
       </header>
-      <div class="sm:container sm:mx-auto px-3 sm:px-0">
-          <h1 class="tracking-normal leading-normal font-bold text-2xl md:text-3xl lg:text-4xl mb:4 lg:mb-8">Impressum</h1>
-          <div class="font-normal leading-normal text-md lg:text-lg mb-6 lg:mb-12">
-              <dl class="block">
-                  <dt>Adresse:</dt>
-                  <dd>
-                    <span class="address-name"></span><br>
-                    <span class="address-street"></span> <span class="address-house-number"></span><br>
-                    <span class="address-postal-code"></span> <span class="address-city"></span><br><br>
-                  </dd>
-              </dl>
-              <dl class="flex">
-                  <dt class="flex-initial mr-1">E-Mail:</dt>
-                  <dd class="w-1/2">
-                      <a class="text-blue-600 hover:text-blue-400 focus:text-blue-400 contact-mail" href=""></a>
-                    </dd>
-                </dl>
-                <dl class="flex">
-                    <dt class="flex-initial mr-1">Telefon:</dt>
-                    <dd class="w-1/2">
-                        <a class="text-blue-600 hover:text-blue-400 focus:text-blue-400 contact-phone" href=""></a>
-                    </dd>
+      <div class="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
+          <h1 class="text-3xl md:text-4xl font-bold text-secondary-900 tracking-tight mb-6 md:mb-10">Impressum</h1>
+          <div class="card mb-8 md:mb-12">
+              <dl class="space-y-4">
+                  <div>
+                      <dt class="font-semibold text-secondary-900 mb-1">Adresse:</dt>
+                      <dd class="text-secondary-700">
+                        <span class="address-name block"></span>
+                        <span class="address-street"></span> <span class="address-house-number"></span><br>
+                        <span class="address-postal-code"></span> <span class="address-city"></span>
+                      </dd>
+                  </div>
+                  <div>
+                      <dt class="font-semibold text-secondary-900 mb-1">E-Mail:</dt>
+                      <dd>
+                          <a class="text-primary-600 hover:text-primary-500 focus:text-primary-700 transition-colors duration-250 contact-mail" href="" aria-label="E-Mail kontaktieren"></a>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold text-secondary-900 mb-1">Telefon:</dt>
+                        <dd>
+                            <a class="text-primary-600 hover:text-primary-500 focus:text-primary-700 transition-colors duration-250 contact-phone" href=""></a>
+                        </dd>
+                    </div>
                 </dl>
             </div>
-            <div class="mb-12">
-                <div class="mb-4">
-                    <h2 class="tracking-normal leading-normal font-bold text-2xl md:text-3xl lg:text-4xl mb-4 lg:mb-12">Haftungsausschluss</h2>
-                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 lg:mb-6">Inhaltlich verantwortlich gemäß § 55 Abs. 2 RStV ist <span class="privacy-contact-person"></span>.</p>
-                    <h2 class="font-bold text-xl md:text-2xl mb-1">Haftung für Inhalte</h2>
-                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 lg:mb-6">Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach § 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
-                    <h2 class="font-bold text-xl md:text-2xl mb-1">Haftung für Links</h2>
-                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 lg:mb-6">Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
-                    <h2 class="font-bold text-xl md:text-2xl mb-1">Urheberrecht</h2>
-                    <p class="font-normal leading-normal text-md lg:text-lg mb-3 lg:mb-6">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht, sofern diese nicht unter der CC0 1.0 Universell Lizenz veröffentlicht worden sind. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+            <div class="card mb-8 md:mb-12">
+                <div class="space-y-6">
+                    <h2 class="text-2xl md:text-3xl font-bold text-secondary-900 tracking-tight mb-4">Haftungsausschluss</h2>
+                    <p class="text-base lg:text-lg text-secondary-700 leading-relaxed">Inhaltlich verantwortlich gemäß § 55 Abs. 2 RStV ist <span class="privacy-contact-person font-medium"></span>.</p>
+                    
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-secondary-900 mb-3">Haftung für Inhalte</h3>
+                        <p class="text-base lg:text-lg text-secondary-700 leading-relaxed">Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach § 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-secondary-900 mb-3">Haftung für Links</h3>
+                        <p class="text-base lg:text-lg text-secondary-700 leading-relaxed">Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-secondary-900 mb-3">Urheberrecht</h3>
+                        <p class="text-base lg:text-lg text-secondary-700 leading-relaxed">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht, sofern diese nicht unter der CC0 1.0 Universell Lizenz veröffentlicht worden sind. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+                    </div>
                 </div>
-            </div><a name="privacy" id="privacy"></a>
-            <h1 class="text-3xl font-bold mb-8">Datenschutzerklärung</h1>
+            </div>
+            
+            <a name="privacy" id="privacy" class="block -mt-20 pt-20"></a>
+            <h1 class="text-3xl md:text-4xl font-bold text-secondary-900 tracking-tight mb-6 md:mb-10">Datenschutzerklärung</h1>
             <div class="mb-4">
                 <div class="mb-4">
                   <p class="font-normal leading-normal text-md lg:text-lg mb-3 lg:mb-6">Das Open Knowledge Lab Flensburg, Am Nordertor 2, 24939 Flensburg, Deutschland (nachfolgend als "OK Lab Flensburg" oder "wir" bezeichnet) betreibt die im Internet unter <a class="website-origin text-blue-600 hover:text-blue-400 focus:text-blue-400" href=""></a> und den jeweils dazu gehörenden Unterverzeichnissen abrufbare Internetseite (nachfolgend die "Website" genannt).</p>
